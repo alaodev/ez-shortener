@@ -4,11 +4,16 @@
   "description": "Ez-shortener is a simple and efficient URL shortening application",
   "author": "alaodev",
   "license": "UNLICENSED",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "devDependencies": {
     "turbo": "^2.4.4"
-  }
+  },
+  "packageManager": "npm@10.9.2"
 }
