@@ -1,0 +1,7 @@
+{
+  "name": "@ez-shortener/tsconfig",
+  "version": "1.0.0",
+  "description": "Ez-shortener application typescript settings",
+  "author": "alaodev",
+  "license": "UNLICENSED"
+}
