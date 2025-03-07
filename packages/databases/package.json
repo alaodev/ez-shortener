@@ -5,6 +5,31 @@
   "author": "alaodev",
   "private": true,
   "license": "UNLICENSED",
+  "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "mongoose": [
+        "dist/mongoose.d.ts"
+      ],
+      "nestjs-mongoose": [
+        "dist/nestjs-mongoose.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./mongoose": {
+      "require": "./dist/mongoose.js",
+      "import": "./dist/mongoose/mongoose.js"
+    },
+    "./nestjs-mongoose": {
+      "require": "./dist/nestjs-mongoose.js",
+      "import": "./dist/nestjs-mongoose.js"
+    }
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
