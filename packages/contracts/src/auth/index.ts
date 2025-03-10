@@ -1,1 +1,1 @@
-export * from './create-user.contract';
+export * from './register-user.contract';

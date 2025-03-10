@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const createUserSchema = z
+export const registerUserSchema = z
   .object({
     username: z
       .string({ message: 'field is required' })
@@ -26,4 +26,4 @@ export const createUserSchema = z
     path: ['passwordConfirmation'],
   });
 
-export type CreateUserContract = z.infer<typeof createUserSchema>;
+export type RegisterUserContract = z.infer<typeof registerUserSchema>;
