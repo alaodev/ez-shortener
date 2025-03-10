@@ -3,8 +3,8 @@ import { CreateUserInput } from '../../domain/types/inputs/use-cases/create-user
 import { User } from '../../domain/entities/user.entity';
 import { CreateUserUseCase } from '../../domain/use-cases/create-user.usecase';
 import { UserRepository } from '../../domain/repositories/user.repository';
-import { EncryptionService } from '../../domain/services/encryption.service';
 import { CreateUserOutput } from '../../domain/types/outputs/use-cases/create-user.output';
+import { EncryptionService } from '../../../../common/domain/services/encryption.service';
 
 @Injectable()
 export class CreateUserUseCaseImpl implements CreateUserUseCase {

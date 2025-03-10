@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { CreateUserUseCaseImpl } from './application/use-cases/create-user.usecase.impl';
 import { User, UserSchema } from './infrastructure/schemas/user.schema';
 import { UserMongoRepository } from './infrastructure/repositories/user-mongo.repository';
-import { BcryptEncryptionService } from './infrastructure/services/bcrypt-encryption.service';
+import { BcryptEncryptionService } from '../../common/infrastructure/services/bcrypt-encryption.service';
 
 @Module({
   imports: [
