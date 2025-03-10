@@ -2,6 +2,7 @@ import * as path from 'path';
 import { DatabasesModule } from '@ez-shortener/databases';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       },
       inject: [ConfigService],
     }),
+    UsersModule,
   ],
 })
 export class AppModule {}
