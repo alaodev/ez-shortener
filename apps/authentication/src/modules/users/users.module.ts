@@ -10,9 +10,10 @@ import { BcryptEncryptionService } from '../../common/infrastructure/services/bc
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   providers: [
-    CreateUserUseCaseImpl,
+    { provide: 'CreateUserUseCase', useClass: CreateUserUseCaseImpl },
     { provide: 'UserRepository', useClass: UserMongoRepository },
     { provide: 'EncryptionService', useClass: BcryptEncryptionService },
   ],
+  exports: ['CreateUserUseCase'],
 })
 export class UsersModule {}
