@@ -17,6 +17,7 @@
   "dependencies": {
     "@ez-shortener/contracts": "*",
     "@ez-shortener/databases": "*",
+    "@ez-shortener/pipes": "*",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.1",
     "@nestjs/core": "^11.0.1",
