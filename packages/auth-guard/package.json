@@ -1,7 +1,7 @@
 {
-  "name": "@ez-shortener/guards",
+  "name": "@ez-shortener/auth-guard",
   "version": "1.0.0",
-  "description": "Ez-shortener application guards service",
+  "description": "Ez-shortener application auth-guard service",
   "author": "alaodev",
   "private": true,
   "license": "UNLICENSED",
