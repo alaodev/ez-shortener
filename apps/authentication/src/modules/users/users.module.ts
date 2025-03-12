@@ -1,7 +1,9 @@
 import { MongooseModule } from '@ez-shortener/databases/nestjs-mongoose';
 import { Module } from '@nestjs/common';
-import { CreateUserUseCaseImpl } from './application/use-cases/create-user.usecase.impl';
-import { FindUserByEmailUseCaseImpl } from './application/use-cases/find-user-by-email.usecase.impl';
+import {
+  CreateUserUseCaseImpl,
+  FindUserByEmailUseCaseImpl,
+} from './application/use-cases';
 import { User, UserSchema } from './infrastructure/schemas/user.schema';
 import { MongoCreateUserRepository } from './infrastructure/repositories/mongo-create-user.repository';
 import { MongoFindUserByEmailRepository } from './infrastructure/repositories/mongo-find-user-by-email.repository';
