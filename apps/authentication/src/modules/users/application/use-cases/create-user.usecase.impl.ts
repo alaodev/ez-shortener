@@ -2,8 +2,10 @@ import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserInput } from '../../domain/types/inputs/use-cases/create-user.input';
 import { User } from '../../domain/entities/user.entity';
 import { CreateUserUseCase } from '../../domain/use-cases/create-user.usecase';
-import { FindUserByEmailRepository } from '../../domain/repositories/find-user-by-email.repository';
-import { CreateUserRepository } from '../../domain/repositories/create-user.repository';
+import {
+  CreateUserRepository,
+  FindUserByEmailRepository,
+} from '../../domain/repositories';
 import { CreateUserOutput } from '../../domain/types/outputs/use-cases/create-user.output';
 import { HashingService } from '../../../../common/domain/services/hashing.service';
 
