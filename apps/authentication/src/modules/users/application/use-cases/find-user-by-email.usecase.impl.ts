@@ -1,14 +1,15 @@
 import { Inject } from '@nestjs/common';
 import { FindUserByEmailOutput } from '../../domain/types/outputs/use-cases/find-user-by-email.output';
 import { FindUserByEmailUseCase } from '../../domain/use-cases/find-user-by-email.usecase';
-import { UserRepository } from '../../domain/repositories/user.repository';
+import { FindUserByEmailRepository } from '../../domain/repositories/find-user-by-email.repository';
 
 export class FindUserByEmailUseCaseImpl implements FindUserByEmailUseCase {
   constructor(
-    @Inject('UserRepository') private readonly userRepository: UserRepository,
+    @Inject('FindUserByEmailRepository')
+    private readonly findUserByEmailRepository: FindUserByEmailRepository,
   ) {}
 
   async execute(email: string): Promise<FindUserByEmailOutput | null> {
-    return this.userRepository.findUserByEmail(email);
+    return this.findUserByEmailRepository.findUserByEmail(email);
   }
 }

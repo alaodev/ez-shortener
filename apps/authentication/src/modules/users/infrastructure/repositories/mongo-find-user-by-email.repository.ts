@@ -3,24 +3,14 @@ import { InjectModel } from '@ez-shortener/databases/nestjs-mongoose';
 import { Injectable } from '@nestjs/common';
 import { User as UserSchema } from '../schemas/user.schema';
 import { User } from '../../domain/entities/user.entity';
-import { UserRepository } from '../../domain/repositories/user.repository';
-import {
-  CreateUserRepositoryOutput,
-  FindUserByEmailRepositoryOutput,
-} from '../../domain/types/outputs/repositories/user-repository.output';
+import { FindUserByEmailRepository } from '../../domain/repositories/find-user-by-email.repository';
+import { FindUserByEmailRepositoryOutput } from '../../domain/types/outputs/repositories/user-repository.output';
 
 @Injectable()
-export class UserMongoRepository implements UserRepository {
+export class MongoFindUserByEmailRepository
+  implements FindUserByEmailRepository
+{
   constructor(@InjectModel(UserSchema.name) private userModel: Model<User>) {}
-
-  async createUser(user: User): Promise<CreateUserRepositoryOutput> {
-    const createdUser = await this.userModel.create(user);
-    return {
-      id: createdUser._id.toString(),
-      username: createdUser.username,
-      email: createdUser.email,
-    };
-  }
 
   async findUserByEmail(
     email: string,
