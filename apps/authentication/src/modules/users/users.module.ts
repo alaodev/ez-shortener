@@ -5,8 +5,10 @@ import {
   FindUserByEmailUseCaseImpl,
 } from './application/use-cases';
 import { User, UserSchema } from './infrastructure/schemas/user.schema';
-import { MongoCreateUserRepository } from './infrastructure/repositories/mongo-create-user.repository';
-import { MongoFindUserByEmailRepository } from './infrastructure/repositories/mongo-find-user-by-email.repository';
+import {
+  MongoCreateUserRepository,
+  MongoFindUserByEmailRepository,
+} from './infrastructure/repositories';
 import { BcryptHashingService } from '../../common/infrastructure/services/bcrypt-hashing.service';
 
 @Module({
