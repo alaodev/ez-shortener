@@ -4,7 +4,7 @@ import { CreateUserUseCaseImpl } from './application/use-cases/create-user.useca
 import { FindUserByEmailUseCaseImpl } from './application/use-cases/find-user-by-email.usecase.impl';
 import { User, UserSchema } from './infrastructure/schemas/user.schema';
 import { UserMongoRepository } from './infrastructure/repositories/user-mongo.repository';
-import { BcryptEncryptionService } from '../../common/infrastructure/services/bcrypt-encryption.service';
+import { BcryptHashingService } from '../../common/infrastructure/services/bcrypt-hashing.service';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { BcryptEncryptionService } from '../../common/infrastructure/services/bc
     { provide: 'CreateUserUseCase', useClass: CreateUserUseCaseImpl },
     { provide: 'FindUserByEmailUseCase', useClass: FindUserByEmailUseCaseImpl },
     { provide: 'UserRepository', useClass: UserMongoRepository },
-    { provide: 'EncryptionService', useClass: BcryptEncryptionService },
+    { provide: 'HashingService', useClass: BcryptHashingService },
   ],
   exports: ['CreateUserUseCase', 'FindUserByEmailUseCase'],
 })

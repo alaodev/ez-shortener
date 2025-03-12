@@ -4,14 +4,14 @@ import { AuthenticateUserInput } from '../../domain/types/input/use-cases/authen
 import { AuthenticateUserOutput } from '../../domain/types/output/use-cases/authenticate-user.output';
 import { AuthenticateUserUseCase } from '../../domain/use-cases/authenticate-user.usecase';
 import { FindUserByEmailUseCase } from '../../../users/domain/use-cases/find-user-by-email.usecase';
-import { EncryptionService } from '../../../../common/domain/services/encryption.service';
+import { CompareService } from '../../../../common/domain/services/compare.service';
 
 export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
   constructor(
     @Inject('FindUserByEmailUseCase')
     private readonly findUserByEmailUseCase: FindUserByEmailUseCase,
-    @Inject('EncryptionService')
-    private readonly encryptionService: EncryptionService,
+    @Inject('CompareService')
+    private readonly compareService: CompareService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -21,7 +21,7 @@ export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
     if (!foundUser)
       throw new UnauthorizedException('invalid email or password');
     const { id, username, password: encryptedPassword } = foundUser;
-    const passwordsMatch = await this.encryptionService.compare(
+    const passwordsMatch = await this.compareService.compare(
       password,
       encryptedPassword,
     );
