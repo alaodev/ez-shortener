@@ -6,8 +6,10 @@ import {
   authenticateUserSchema,
 } from '@ez-shortener/contracts';
 import { Body, Controller, Inject, Post, UsePipes } from '@nestjs/common';
-import { RegisterUserUseCase } from '../domain/use-cases/register-user.usecase';
-import { AuthenticateUserUseCase } from '../domain/use-cases/authenticate-user.usecase';
+import {
+  AuthenticateUserUseCase,
+  RegisterUserUseCase,
+} from '../domain/use-cases';
 
 @Controller('auth')
 export class AuthController {
