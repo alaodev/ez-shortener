@@ -1,15 +1,18 @@
 export class Url {
   public readonly id?: string;
   public originalUrl: string;
-  public shortUrl: string;
+  public shortId: string;
+  public owner: string;
 
   constructor({
     id,
     originalUrl,
-    shortUrl,
-  }: Partial<Url> & Pick<Url, 'originalUrl' | 'shortUrl'>) {
+    shortId,
+    owner,
+  }: Partial<Url> & Pick<Url, 'originalUrl' | 'shortId' | 'owner'>) {
     this.id = id;
     this.originalUrl = originalUrl;
-    this.shortUrl = shortUrl;
+    this.shortId = shortId;
+    this.owner = owner;
   }
 }
