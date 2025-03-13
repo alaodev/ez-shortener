@@ -1,6 +1,7 @@
 import * as path from 'path';
+import { DatabasesModule } from '@ez-shortener/databases';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UrlsModule } from './modules/urls/urls.module';
 
 @Module({
@@ -8,6 +9,17 @@ import { UrlsModule } from './modules/urls/urls.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: path.resolve(__dirname, '..', '..', '..', '.env'),
+    }),
+    DatabasesModule.registerAsync({
+      useFactory: (configService: ConfigService) => {
+        const uri = configService.get<string>('MONGO_URLS_URI');
+        if (!uri) throw new Error('MONGO_URLS_URI must be provided');
+        return {
+          uri,
+          dbName: 'urls',
+        };
+      },
+      inject: [ConfigService],
     }),
     UrlsModule,
   ],
