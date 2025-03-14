@@ -1,10 +1,14 @@
 import { MongooseModule } from '@ez-shortener/databases/nestjs-mongoose';
 import { Module } from '@nestjs/common';
-import { ShortenUserUrlUseCaseImpl } from './application/use-cases/shorten-user-url.usecase.impl';
+import {
+  ShortenUserUrlUseCaseImpl,
+  FindAllUserUrlsUseCaseImpl,
+} from './application/use-cases';
 import { Url, UrlSchema } from './infrastructure/schemas/url.schema';
 import { UrlsController } from './presentation/urls.controller';
 import {
   MongoCreateUrlRepository,
+  MongoFindAllUrlsByOwnerRepository,
   MongoFindUrlByShortIdRepository,
 } from './infrastructure/repositories';
 import { NanoidGenerateIdentifierService } from './infrastructure/services/nanoid-generate-identifier.service';
@@ -14,12 +18,20 @@ import { NanoidGenerateIdentifierService } from './infrastructure/services/nanoi
   controllers: [UrlsController],
   providers: [
     {
+      provide: 'FindAllUserUrlsUseCase',
+      useClass: FindAllUserUrlsUseCaseImpl,
+    },
+    {
       provide: 'ShortenUserUrlUseCase',
       useClass: ShortenUserUrlUseCaseImpl,
     },
     {
       provide: 'GenerateIdentifierService',
       useClass: NanoidGenerateIdentifierService,
+    },
+    {
+      provide: 'FindAllUrlsByOwnerRepository',
+      useClass: MongoFindAllUrlsByOwnerRepository,
     },
     {
       provide: 'CreateUrlRepository',

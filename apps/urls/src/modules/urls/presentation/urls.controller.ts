@@ -4,20 +4,33 @@ import { ZodValidationPipe } from '@ez-shortener/pipes';
 import {
   Body,
   Controller,
+  Get,
   Inject,
   Post,
   Req,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
-import { ShortenUserUrlUseCase } from '../domain/use-cases/shorten-user-url.usecase';
+import {
+  FindAllUserUrlsUseCase,
+  ShortenUserUrlUseCase,
+} from '../domain/use-cases';
 
 @Controller('urls')
 export class UrlsController {
   constructor(
+    @Inject('FindAllUserUrlsUseCase')
+    private readonly findAllUsersUrlsUseCase: FindAllUserUrlsUseCase,
     @Inject('ShortenUserUrlUseCase')
     private readonly shortenUserUrlUseCase: ShortenUserUrlUseCase,
   ) {}
+
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  findAllUserUrls(@Req() req: AuthenticatedRequest) {
+    const { user } = req;
+    return this.findAllUsersUrlsUseCase.execute(user.id);
+  }
 
   @Post('shorten')
   @UseGuards(JwtAuthGuard)
