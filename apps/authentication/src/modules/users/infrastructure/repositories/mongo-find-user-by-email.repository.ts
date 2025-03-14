@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { User as UserSchema } from '../schemas/user.schema';
 import { User } from '../../domain/entities/user.entity';
 import { FindUserByEmailRepository } from '../../domain/repositories/find-user-by-email.repository';
-import { FindUserByEmailRepositoryOutput } from '../../domain/types/outputs/repositories/user-repository.output';
+import { FindUserByEmailRepositoryOutput } from '../../domain/types/outputs/repositories/find-user-by-email-repository.output';
 
 @Injectable()
 export class MongoFindUserByEmailRepository

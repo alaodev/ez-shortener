@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { User as UserSchema } from '../schemas/user.schema';
 import { User } from '../../domain/entities/user.entity';
 import { CreateUserRepository } from '../../domain/repositories/create-user.repository';
-import { CreateUserRepositoryOutput } from '../../domain/types/outputs/repositories/user-repository.output';
+import { CreateUserRepositoryOutput } from '../../domain/types/outputs/repositories/create-user-repository.output';
 
 @Injectable()
 export class MongoCreateUserRepository implements CreateUserRepository {
