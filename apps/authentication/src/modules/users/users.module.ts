@@ -9,7 +9,7 @@ import {
   MongoCreateUserRepository,
   MongoFindUserByEmailRepository,
 } from './infrastructure/repositories';
-import { BcryptHashingService } from '../../common/infrastructure/services/bcrypt-hashing.service';
+import { BcryptHashingService } from './infrastructure/services/bcrypt-hashing.service';
 
 @Module({
   imports: [

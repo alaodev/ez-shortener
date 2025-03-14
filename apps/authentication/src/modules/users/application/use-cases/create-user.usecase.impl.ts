@@ -7,7 +7,7 @@ import {
   FindUserByEmailRepository,
 } from '../../domain/repositories';
 import { CreateUserOutput } from '../../domain/types/outputs/use-cases/create-user.output';
-import { HashingService } from '../../../../common/domain/services/hashing.service';
+import { HashingService } from '../../domain/services/hashing.service';
 
 @Injectable()
 export class CreateUserUseCaseImpl implements CreateUserUseCase {
