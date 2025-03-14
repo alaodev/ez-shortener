@@ -1,6 +1,6 @@
 import { MongooseModule } from '@ez-shortener/databases/nestjs-mongoose';
 import { Module } from '@nestjs/common';
-import { ShortenUrlUseCaseImpl } from './application/use-cases/shorten-url.usecase.impl';
+import { ShortenUserUrlUseCaseImpl } from './application/use-cases/shorten-user-url.usecase.impl';
 import { Url, UrlSchema } from './infrastructure/schemas/url.schema';
 import { UrlsController } from './presentation/urls.controller';
 import {
@@ -14,8 +14,8 @@ import { NanoidGenerateIdentifierService } from './infrastructure/services/nanoi
   controllers: [UrlsController],
   providers: [
     {
-      provide: 'ShortenUrlUseCase',
-      useClass: ShortenUrlUseCaseImpl,
+      provide: 'ShortenUserUrlUseCase',
+      useClass: ShortenUserUrlUseCaseImpl,
     },
     {
       provide: 'GenerateIdentifierService',

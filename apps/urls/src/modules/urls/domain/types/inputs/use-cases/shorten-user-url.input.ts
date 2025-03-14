@@ -1,4 +1,4 @@
-export type ShortenUrlInput = {
+export type ShortenUserUrlInput = {
   originalUrl: string;
   owner: string;
 };

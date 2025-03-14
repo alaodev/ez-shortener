@@ -10,13 +10,13 @@ import {
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
-import { ShortenUrlUseCase } from '../domain/use-cases/shorten-url.usecase';
+import { ShortenUserUrlUseCase } from '../domain/use-cases/shorten-user-url.usecase';
 
 @Controller('urls')
 export class UrlsController {
   constructor(
-    @Inject('ShortenUrlUseCase')
-    private readonly shortenUrlUseCase: ShortenUrlUseCase,
+    @Inject('ShortenUserUrlUseCase')
+    private readonly shortenUserUrlUseCase: ShortenUserUrlUseCase,
   ) {}
 
   @Post('shorten')
@@ -28,7 +28,7 @@ export class UrlsController {
   ) {
     const { originalUrl } = shortenUrlContract;
     const { user } = req;
-    return this.shortenUrlUseCase.execute({
+    return this.shortenUserUrlUseCase.execute({
       originalUrl: originalUrl,
       owner: user.id,
     });
