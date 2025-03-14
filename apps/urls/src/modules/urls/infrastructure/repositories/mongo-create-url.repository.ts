@@ -19,7 +19,7 @@ export class MongoCreateUrlRepository implements CreateUrlRepository {
       id: createdUrl._id.toString(),
       originalUrl: createdUrl.originalUrl,
       shortId: createdUrl.shortId,
-      owner: createdUrl._id.toString(),
+      owner: createdUrl.owner.toString(),
     };
   }
 }
