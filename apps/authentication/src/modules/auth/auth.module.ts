@@ -5,7 +5,7 @@ import {
   AuthenticateUserUseCaseImpl,
   RegisterUserUseCaseImpl,
 } from './application/use-cases';
-import { BcryptCompareService } from '../../common/infrastructure/services/bcrypt-compare.service';
+import { BcryptCompareService } from './infrastructure/bcrypt-compare.service';
 
 @Module({
   imports: [UsersModule],

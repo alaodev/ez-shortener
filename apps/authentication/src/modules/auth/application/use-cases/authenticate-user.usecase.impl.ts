@@ -4,7 +4,7 @@ import { AuthenticateUserInput } from '../../domain/types/input/use-cases/authen
 import { AuthenticateUserOutput } from '../../domain/types/output/use-cases/authenticate-user.output';
 import { AuthenticateUserUseCase } from '../../domain/use-cases/authenticate-user.usecase';
 import { FindUserByEmailUseCase } from '../../../users/domain/use-cases/find-user-by-email.usecase';
-import { CompareService } from '../../../../common/domain/services/compare.service';
+import { CompareService } from '../../domain/services/compare.service';
 
 export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
   constructor(

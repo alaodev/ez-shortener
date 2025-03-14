@@ -1,2 +1,2 @@
 export * from './bcrypt-hashing.service';
-export * from './bcrypt-compare.service';
+export * from '../../../modules/auth/infrastructure/bcrypt-compare.service';
