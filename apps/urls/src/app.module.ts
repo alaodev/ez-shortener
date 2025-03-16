@@ -28,7 +28,6 @@ import { UrlsModule } from './modules/urls/urls.module';
         if (!jwtSecret) throw new Error('JWT_SECRET must be provided');
         return {
           secret: jwtSecret,
-          signOptions: { expiresIn: '1d' },
         };
       },
       inject: [ConfigService],
