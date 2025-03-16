@@ -12,23 +12,17 @@ import {
   MongoFindUrlByShortIdRepository,
 } from './infrastructure/repositories';
 import { NanoidGenerateIdentifierService } from './infrastructure/services/nanoid-generate-identifier.service';
+import { FindAllUrlsByOwnerRepository } from './domain/repositories/find-all-urls-by-owner.repository';
+import { GenerateIdentifierService } from './domain/services/ generate-identifier.service';
+import {
+  CreateUrlRepository,
+  FindUrlByShortIdRepository,
+} from './domain/repositories';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Url.name, schema: UrlSchema }])],
   controllers: [UrlsController],
   providers: [
-    {
-      provide: 'FindAllUserUrlsUseCase',
-      useClass: FindAllUserUrlsUseCaseImpl,
-    },
-    {
-      provide: 'ShortenUserUrlUseCase',
-      useClass: ShortenUserUrlUseCaseImpl,
-    },
-    {
-      provide: 'GenerateIdentifierService',
-      useClass: NanoidGenerateIdentifierService,
-    },
     {
       provide: 'FindAllUrlsByOwnerRepository',
       useClass: MongoFindAllUrlsByOwnerRepository,
@@ -40,6 +34,38 @@ import { NanoidGenerateIdentifierService } from './infrastructure/services/nanoi
     {
       provide: 'FindUrlByShortIdRepository',
       useClass: MongoFindUrlByShortIdRepository,
+    },
+    {
+      provide: 'GenerateIdentifierService',
+      useClass: NanoidGenerateIdentifierService,
+    },
+    {
+      provide: 'FindAllUserUrlsUseCase',
+      useFactory: (
+        findAllUrlsByOwnerRepository: FindAllUrlsByOwnerRepository,
+      ) => {
+        return new FindAllUserUrlsUseCaseImpl(findAllUrlsByOwnerRepository);
+      },
+      inject: ['FindAllUrlsByOwnerRepository'],
+    },
+    {
+      provide: 'ShortenUserUrlUseCase',
+      useFactory: (
+        generateIdentifierService: GenerateIdentifierService,
+        findUrlByShortIdRepository: FindUrlByShortIdRepository,
+        createUrlRepository: CreateUrlRepository,
+      ) => {
+        return new ShortenUserUrlUseCaseImpl(
+          generateIdentifierService,
+          findUrlByShortIdRepository,
+          createUrlRepository,
+        );
+      },
+      inject: [
+        'GenerateIdentifierService',
+        'FindUrlByShortIdRepository',
+        'CreateUrlRepository',
+      ],
     },
   ],
 })

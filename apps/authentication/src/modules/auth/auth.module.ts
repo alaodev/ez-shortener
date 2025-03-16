@@ -9,21 +9,40 @@ import {
   BcryptCompareService,
   JwtSignService,
 } from './infrastructure/services';
+import {
+  CreateUserUseCase,
+  FindUserByEmailUseCase,
+} from '../users/domain/use-cases';
+import { CompareService, SignService } from './domain/services';
 
 @Module({
   imports: [UsersModule],
   controllers: [AuthController],
   providers: [
+    { provide: 'CompareService', useClass: BcryptCompareService },
+    { provide: 'SignService', useClass: JwtSignService },
     {
       provide: 'AuthenticateUserUseCase',
-      useClass: AuthenticateUserUseCaseImpl,
+      useFactory: (
+        findUserByEmailUseCase: FindUserByEmailUseCase,
+        compareService: CompareService,
+        signService: SignService,
+      ) => {
+        return new AuthenticateUserUseCaseImpl(
+          findUserByEmailUseCase,
+          compareService,
+          signService,
+        );
+      },
+      inject: ['FindUserByEmailUseCase', 'CompareService', 'SignService'],
     },
     {
       provide: 'RegisterUserUseCase',
-      useClass: RegisterUserUseCaseImpl,
+      useFactory: (createUserUseCase: CreateUserUseCase) => {
+        return new RegisterUserUseCaseImpl(createUserUseCase);
+      },
+      inject: ['CreateUserUseCase'],
     },
-    { provide: 'CompareService', useClass: BcryptCompareService },
-    { provide: 'SignService', useClass: JwtSignService },
   ],
 })
 export class AuthModule {}

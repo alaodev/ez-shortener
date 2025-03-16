@@ -1,4 +1,4 @@
-import { ConflictException, Inject } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { GenerateIdentifierService } from '../../domain/services/ generate-identifier.service';
 import { ShortenUserUrlUseCase } from '../../domain/use-cases/shorten-user-url.usecase';
 import {
@@ -11,11 +11,8 @@ import { ShortenUserUrlOutput } from '../../domain/types/output/use-cases/shorte
 
 export class ShortenUserUrlUseCaseImpl implements ShortenUserUrlUseCase {
   constructor(
-    @Inject('GenerateIdentifierService')
     private readonly generateIdentifierService: GenerateIdentifierService,
-    @Inject('FindUrlByShortIdRepository')
     private readonly findUrlByShortIdRepository: FindUrlByShortIdRepository,
-    @Inject('CreateUrlRepository')
     private readonly createUrlRepository: CreateUrlRepository,
   ) {}
 

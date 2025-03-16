@@ -1,4 +1,4 @@
-import { Inject, UnauthorizedException } from '@nestjs/common';
+import { UnauthorizedException } from '@nestjs/common';
 import { AuthenticateUserInput } from '../../domain/types/input/use-cases/authenticate-user.input';
 import { AuthenticateUserOutput } from '../../domain/types/output/use-cases/authenticate-user.output';
 import { AuthenticateUserUseCase } from '../../domain/use-cases/authenticate-user.usecase';
@@ -7,11 +7,8 @@ import { CompareService, SignService } from '../../domain/services';
 
 export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
   constructor(
-    @Inject('FindUserByEmailUseCase')
     private readonly findUserByEmailUseCase: FindUserByEmailUseCase,
-    @Inject('CompareService')
     private readonly compareService: CompareService,
-    @Inject('SignService')
     private readonly signService: SignService,
   ) {}
 

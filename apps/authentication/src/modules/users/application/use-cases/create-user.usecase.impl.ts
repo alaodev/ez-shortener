@@ -1,4 +1,4 @@
-import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import { ConflictException } from '@nestjs/common';
 import { CreateUserInput } from '../../domain/types/inputs/use-cases/create-user.input';
 import { User } from '../../domain/entities/user.entity';
 import { CreateUserUseCase } from '../../domain/use-cases/create-user.usecase';
@@ -9,14 +9,10 @@ import {
 import { CreateUserOutput } from '../../domain/types/outputs/use-cases/create-user.output';
 import { HashingService } from '../../domain/services/hashing.service';
 
-@Injectable()
 export class CreateUserUseCaseImpl implements CreateUserUseCase {
   constructor(
-    @Inject('FindUserByEmailRepository')
     private readonly findUserByEmailRepository: FindUserByEmailRepository,
-    @Inject('CreateUserRepository')
     private readonly createUserRepository: CreateUserRepository,
-    @Inject('HashingService')
     private readonly hashingService: HashingService,
   ) {}
 
