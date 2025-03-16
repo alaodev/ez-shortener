@@ -27,7 +27,7 @@ import {
   imports: [
     MongooseModule.forFeature([
       { name: Access.name, schema: AccessSchema, collection: 'access' },
-      { name: Url.name, schema: UrlSchema },
+      { name: Url.name, schema: UrlSchema, collection: 'urls' },
     ]),
   ],
   controllers: [UrlsController],
