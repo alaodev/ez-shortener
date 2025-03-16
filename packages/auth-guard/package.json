@@ -5,7 +5,24 @@
   "author": "alaodev",
   "private": true,
   "license": "UNLICENSED",
-  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "typesVersions": {
+    "*": {
+      "nestjs-jwt": [
+        "dist/nestjs-jwt.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/main.js",
+      "import": "./dist/main.js"
+    },
+    "./nestjs-jwt": {
+      "require": "./dist/nestjs-jwt.js",
+      "import": "./dist/nestjs-jwt.js"
+    }
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
