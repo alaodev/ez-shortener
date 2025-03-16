@@ -5,7 +5,10 @@ import {
   AuthenticateUserUseCaseImpl,
   RegisterUserUseCaseImpl,
 } from './application/use-cases';
-import { BcryptCompareService } from './infrastructure/services/bcrypt-compare.service';
+import {
+  BcryptCompareService,
+  JwtSignService,
+} from './infrastructure/services';
 
 @Module({
   imports: [UsersModule],
@@ -20,6 +23,7 @@ import { BcryptCompareService } from './infrastructure/services/bcrypt-compare.s
       useClass: RegisterUserUseCaseImpl,
     },
     { provide: 'CompareService', useClass: BcryptCompareService },
+    { provide: 'SignService', useClass: JwtSignService },
   ],
 })
 export class AuthModule {}

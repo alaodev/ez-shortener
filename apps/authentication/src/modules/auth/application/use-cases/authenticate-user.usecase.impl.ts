@@ -1,10 +1,9 @@
 import { Inject, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { AuthenticateUserInput } from '../../domain/types/input/use-cases/authenticate-user.input';
 import { AuthenticateUserOutput } from '../../domain/types/output/use-cases/authenticate-user.output';
 import { AuthenticateUserUseCase } from '../../domain/use-cases/authenticate-user.usecase';
 import { FindUserByEmailUseCase } from '../../../users/domain/use-cases/find-user-by-email.usecase';
-import { CompareService } from '../../domain/services/compare.service';
+import { CompareService, SignService } from '../../domain/services';
 
 export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
   constructor(
@@ -12,7 +11,8 @@ export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
     private readonly findUserByEmailUseCase: FindUserByEmailUseCase,
     @Inject('CompareService')
     private readonly compareService: CompareService,
-    private readonly jwtService: JwtService,
+    @Inject('SignService')
+    private readonly signService: SignService,
   ) {}
 
   async execute(data: AuthenticateUserInput): Promise<AuthenticateUserOutput> {
@@ -29,7 +29,7 @@ export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
       throw new UnauthorizedException('invalid email or password');
     const payload = { id, username };
     return {
-      accessToken: await this.jwtService.signAsync(payload),
+      accessToken: await this.signService.sign(payload),
     };
   }
 }
