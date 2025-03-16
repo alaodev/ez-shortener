@@ -15,6 +15,7 @@ export class ResolveShortenedUrlUseCaseImpl
       await this.findUrlByShortIdRepository.findUrlByShortId(shortId);
     if (!foundUrl) throw new NotFoundException('url not found');
     return {
+      id: foundUrl.id,
       originalUrl: foundUrl.originalUrl,
     };
   }
