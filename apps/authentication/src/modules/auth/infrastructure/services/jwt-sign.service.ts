@@ -1,5 +1,5 @@
+import { JwtService } from '@ez-shortener/auth-guard/nestjs-jwt';
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { SignService } from '../../domain/services/sign.service';
 
 @Injectable()
