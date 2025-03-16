@@ -4,10 +4,12 @@ import {
   FindAllUserUrlsUseCaseImpl,
   ResolveShortenedUrlUseCaseImpl,
   ShortenUserUrlUseCaseImpl,
+  TrackUrlAccessUseCaseImpl,
 } from './application/use-cases';
-import { Url, UrlSchema } from './infrastructure/schemas/url.schema';
+import { Url, UrlSchema, Access, AccessSchema } from './infrastructure/schemas';
 import { UrlsController } from './presentation/urls.controller';
 import {
+  MongoCreateAccessRepository,
   MongoCreateUrlRepository,
   MongoFindAllUrlsByOwnerRepository,
   MongoFindUrlByShortIdRepository,
@@ -16,14 +18,24 @@ import { NanoidGenerateIdentifierService } from './infrastructure/services/nanoi
 import { FindAllUrlsByOwnerRepository } from './domain/repositories/find-all-urls-by-owner.repository';
 import { GenerateIdentifierService } from './domain/services/ generate-identifier.service';
 import {
+  CreateAccessRepository,
   CreateUrlRepository,
   FindUrlByShortIdRepository,
 } from './domain/repositories';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Url.name, schema: UrlSchema }])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: Access.name, schema: AccessSchema, collection: 'access' },
+      { name: Url.name, schema: UrlSchema },
+    ]),
+  ],
   controllers: [UrlsController],
   providers: [
+    {
+      provide: 'CreateAccessRepository',
+      useClass: MongoCreateAccessRepository,
+    },
     {
       provide: 'FindAllUrlsByOwnerRepository',
       useClass: MongoFindAllUrlsByOwnerRepository,
@@ -46,6 +58,13 @@ import {
         return new ResolveShortenedUrlUseCaseImpl(findUrlByShortIdRepository);
       },
       inject: ['FindUrlByShortIdRepository'],
+    },
+    {
+      provide: 'TrackUrlAccessUseCase',
+      useFactory: (createAccessRepository: CreateAccessRepository) => {
+        return new TrackUrlAccessUseCaseImpl(createAccessRepository);
+      },
+      inject: ['CreateAccessRepository'],
     },
     {
       provide: 'FindAllUserUrlsUseCase',

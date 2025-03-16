@@ -1,4 +1,8 @@
-import { AuthenticatedRequest, JwtAuthGuard } from '@ez-shortener/auth-guard';
+import {
+  AuthenticatedRequest,
+  ExpressRequest,
+  JwtAuthGuard,
+} from '@ez-shortener/auth-guard';
 import { ShortenUrlContract, shortenUrlSchema } from '@ez-shortener/contracts';
 import { ZodValidationPipe } from '@ez-shortener/pipes';
 import {
@@ -16,6 +20,7 @@ import {
   FindAllUserUrlsUseCase,
   ResolveShortenedUrlUseCase,
   ShortenUserUrlUseCase,
+  TrackUrlAccessUseCase,
 } from '../domain/use-cases';
 
 @Controller('urls')
@@ -23,6 +28,8 @@ export class UrlsController {
   constructor(
     @Inject('ResolveShortenedUrlUseCase')
     private readonly resolveShortenedUrlUseCase: ResolveShortenedUrlUseCase,
+    @Inject('TrackUrlAccessUseCase')
+    private readonly trackUrlAccessUseCase: TrackUrlAccessUseCase,
     @Inject('FindAllUserUrlsUseCase')
     private readonly findAllUsersUrlsUseCase: FindAllUserUrlsUseCase,
     @Inject('ShortenUserUrlUseCase')
@@ -30,8 +37,18 @@ export class UrlsController {
   ) {}
 
   @Get(':shordId')
-  resolveShortenedUrl(@Param('shordId') shortId: string) {
-    return this.resolveShortenedUrlUseCase.execute(shortId);
+  async resolveShortenedUrl(
+    @Req() req: ExpressRequest,
+    @Param('shordId') shortId: string,
+  ) {
+    const { ip: address } = req;
+    const shortUrlResolved =
+      await this.resolveShortenedUrlUseCase.execute(shortId);
+    await this.trackUrlAccessUseCase.execute({
+      address: address || 'undefined',
+      owner: shortUrlResolved.id,
+    });
+    return shortUrlResolved;
   }
 
   @Get()
