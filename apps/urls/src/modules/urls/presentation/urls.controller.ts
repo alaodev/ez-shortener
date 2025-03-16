@@ -6,6 +6,7 @@ import {
   Controller,
   Get,
   Inject,
+  Param,
   Post,
   Req,
   UseGuards,
@@ -13,17 +14,25 @@ import {
 } from '@nestjs/common';
 import {
   FindAllUserUrlsUseCase,
+  ResolveShortenedUrlUseCase,
   ShortenUserUrlUseCase,
 } from '../domain/use-cases';
 
 @Controller('urls')
 export class UrlsController {
   constructor(
+    @Inject('ResolveShortenedUrlUseCase')
+    private readonly resolveShortenedUrlUseCase: ResolveShortenedUrlUseCase,
     @Inject('FindAllUserUrlsUseCase')
     private readonly findAllUsersUrlsUseCase: FindAllUserUrlsUseCase,
     @Inject('ShortenUserUrlUseCase')
     private readonly shortenUserUrlUseCase: ShortenUserUrlUseCase,
   ) {}
+
+  @Get(':shordId')
+  resolveShortenedUrl(@Param('shordId') shortId: string) {
+    return this.resolveShortenedUrlUseCase.execute(shortId);
+  }
 
   @Get()
   @UseGuards(JwtAuthGuard)
