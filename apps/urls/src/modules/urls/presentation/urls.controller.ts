@@ -46,7 +46,7 @@ export class UrlsController {
       await this.resolveShortenedUrlUseCase.execute(shortId);
     await this.trackUrlAccessUseCase.execute({
       address: address || 'undefined',
-      owner: shortUrlResolved.id,
+      url: shortUrlResolved.id,
     });
     return shortUrlResolved;
   }

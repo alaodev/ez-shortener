@@ -1,15 +1,15 @@
 export class Access {
   public readonly id?: string;
   public address: string;
-  public owner: string;
+  public url: string;
 
   constructor({
     id,
     address,
-    owner,
-  }: Partial<Access> & Pick<Access, 'address' | 'owner'>) {
+    url,
+  }: Partial<Access> & Pick<Access, 'address' | 'url'>) {
     this.id = id;
     this.address = address;
-    this.owner = owner;
+    this.url = url;
   }
 }

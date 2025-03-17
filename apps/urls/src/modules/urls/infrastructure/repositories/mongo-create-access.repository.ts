@@ -15,12 +15,12 @@ export class MongoCreateAccessRepository implements CreateAccessRepository {
   async createAccess(access: Access): Promise<CreateAccessRepositoryOutput> {
     const createdAccess = await this.accessModel.create({
       ...access,
-      owner: new Types.ObjectId(access.owner),
+      url: new Types.ObjectId(access.url),
     });
     return {
       id: createdAccess._id.toString(),
       address: createdAccess.address,
-      owner: createdAccess.owner.toString(),
+      url: createdAccess.url.toString(),
     };
   }
 }

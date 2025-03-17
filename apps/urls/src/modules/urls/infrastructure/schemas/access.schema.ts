@@ -14,7 +14,7 @@ export class Access {
   address: string;
 
   @Prop({ required: true, type: Types.ObjectId, ref: 'Url' })
-  owner: Url;
+  url: Url;
 }
 
 export const AccessSchema = SchemaFactory.createForClass(Access);
