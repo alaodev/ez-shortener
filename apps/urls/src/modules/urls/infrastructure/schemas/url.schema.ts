@@ -7,7 +7,7 @@ import { HydratedDocument, Types } from '@ez-shortener/databases/mongoose';
 
 export type UrlDocument = HydratedDocument<Url>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Url {
   @Prop({ required: true })
   originalUrl: string;

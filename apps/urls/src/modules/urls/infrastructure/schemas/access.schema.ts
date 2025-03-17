@@ -8,7 +8,7 @@ import { Url } from './url.schema';
 
 export type AccessDocument = HydratedDocument<Access>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Access {
   @Prop({ required: true })
   address: string;

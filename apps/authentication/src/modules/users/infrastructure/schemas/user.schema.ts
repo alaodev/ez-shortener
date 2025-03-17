@@ -7,7 +7,7 @@ import { HydratedDocument } from '@ez-shortener/databases/mongoose';
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
   @Prop({ required: true })
   username: string;
