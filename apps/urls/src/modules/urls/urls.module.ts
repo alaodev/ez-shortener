@@ -1,14 +1,17 @@
 import { MongooseModule } from '@ez-shortener/databases/nestjs-mongoose';
 import { Module } from '@nestjs/common';
 import {
+  CountUrlsUseCaseImpl,
   FindAllUserUrlsUseCaseImpl,
   ResolveShortenedUrlUseCaseImpl,
   ShortenUserUrlUseCaseImpl,
   TrackUrlAccessUseCaseImpl,
 } from './application/use-cases';
 import { Url, UrlSchema, Access, AccessSchema } from './infrastructure/schemas';
-import { UrlsController } from './presentation/urls.controller';
+import { UrlsController } from './presentation/controller/urls.controller';
+import { UrlsCountGateway } from './presentation/gateways/urls-count.gateway';
 import {
+  MongoCountUrlsRepository,
   MongoCreateAccessRepository,
   MongoCreateUrlRepository,
   MongoFindAllUrlsByOwnerRepository,
@@ -18,6 +21,7 @@ import { NanoidGenerateIdentifierService } from './infrastructure/services/nanoi
 import { FindAllUrlsByOwnerRepository } from './domain/repositories/find-all-urls-by-owner.repository';
 import { GenerateIdentifierService } from './domain/services/ generate-identifier.service';
 import {
+  CountUrlsRepository,
   CreateAccessRepository,
   CreateUrlRepository,
   FindUrlByShortIdRepository,
@@ -47,6 +51,10 @@ import {
     {
       provide: 'FindUrlByShortIdRepository',
       useClass: MongoFindUrlByShortIdRepository,
+    },
+    {
+      provide: 'CountUrlsRepository',
+      useClass: MongoCountUrlsRepository,
     },
     {
       provide: 'GenerateIdentifierService',
@@ -94,6 +102,14 @@ import {
         'CreateUrlRepository',
       ],
     },
+    {
+      provide: 'CountUrlsUseCase',
+      useFactory: (countUrlsRepository: CountUrlsRepository) => {
+        return new CountUrlsUseCaseImpl(countUrlsRepository);
+      },
+      inject: ['CountUrlsRepository'],
+    },
+    UrlsCountGateway,
   ],
 })
 export class UrlsModule {}
