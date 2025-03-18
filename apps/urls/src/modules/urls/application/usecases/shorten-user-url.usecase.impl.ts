@@ -1,13 +1,13 @@
 import { ConflictException } from '@nestjs/common';
 import { GenerateIdentifierService } from '../../domain/services/ generate-identifier.service';
-import { ShortenUserUrlUseCase } from '../../domain/use-cases/shorten-user-url.usecase';
+import { ShortenUserUrlUseCase } from '../../domain/usecases/shorten-user-url.usecase';
 import {
   CreateUrlRepository,
   FindUrlByShortIdRepository,
 } from '../../domain/repositories';
 import { Url } from '../../domain/entities/url.entity';
-import { ShortenUserUrlInput } from '../../domain/types/inputs/use-cases/shorten-user-url.input';
-import { ShortenUserUrlOutput } from '../../domain/types/output/use-cases/shorten-user-url.output';
+import { ShortenUserUrlInput } from '../../domain/types/inputs/uscases/shorten-user-url.input';
+import { ShortenUserUrlOutput } from '../../domain/types/output/usecases/shorten-user-url.output';
 
 export class ShortenUserUrlUseCaseImpl implements ShortenUserUrlUseCase {
   constructor(

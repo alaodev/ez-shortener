@@ -1,12 +1,12 @@
 import { ConflictException } from '@nestjs/common';
-import { CreateUserInput } from '../../domain/types/inputs/use-cases/create-user.input';
+import { CreateUserInput } from '../../domain/types/inputs/usecases/create-user.input';
 import { User } from '../../domain/entities/user.entity';
-import { CreateUserUseCase } from '../../domain/use-cases/create-user.usecase';
+import { CreateUserUseCase } from '../../domain/usecases/create-user.usecase';
 import {
   CreateUserRepository,
   FindUserByEmailRepository,
 } from '../../domain/repositories';
-import { CreateUserOutput } from '../../domain/types/outputs/use-cases/create-user.output';
+import { CreateUserOutput } from '../../domain/types/outputs/usecases/create-user.output';
 import { HashingService } from '../../domain/services/hashing.service';
 
 export class CreateUserUseCaseImpl implements CreateUserUseCase {

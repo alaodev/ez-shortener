@@ -4,7 +4,7 @@ import { AuthController } from './presentation/auth.controller';
 import {
   AuthenticateUserUseCaseImpl,
   RegisterUserUseCaseImpl,
-} from './application/use-cases';
+} from './application/usecases';
 import {
   BcryptCompareService,
   JwtSignService,
@@ -12,7 +12,7 @@ import {
 import {
   CreateUserUseCase,
   FindUserByEmailUseCase,
-} from '../users/domain/use-cases';
+} from '../users/domain/usecases';
 import { CompareService, SignService } from './domain/services';
 
 @Module({

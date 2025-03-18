@@ -21,7 +21,7 @@ import {
   ResolveShortenedUrlUseCase,
   ShortenUserUrlUseCase,
   TrackUrlAccessUseCase,
-} from '../../domain/use-cases';
+} from '../../domain/usecases';
 
 @Controller('urls')
 export class UrlsController {

@@ -1,8 +1,8 @@
 import { UnauthorizedException } from '@nestjs/common';
-import { AuthenticateUserInput } from '../../domain/types/input/use-cases/authenticate-user.input';
-import { AuthenticateUserOutput } from '../../domain/types/output/use-cases/authenticate-user.output';
-import { AuthenticateUserUseCase } from '../../domain/use-cases/authenticate-user.usecase';
-import { FindUserByEmailUseCase } from '../../../users/domain/use-cases/find-user-by-email.usecase';
+import { AuthenticateUserInput } from '../../domain/types/input/usecases/authenticate-user.input';
+import { AuthenticateUserOutput } from '../../domain/types/output/uscases/authenticate-user.output';
+import { AuthenticateUserUseCase } from '../../domain/usecases/authenticate-user.usecase';
+import { FindUserByEmailUseCase } from '../../../users/domain/usecases/find-user-by-email.usecase';
 import { CompareService, SignService } from '../../domain/services';
 
 export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {

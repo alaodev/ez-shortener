@@ -6,7 +6,7 @@ import {
   ResolveShortenedUrlUseCaseImpl,
   ShortenUserUrlUseCaseImpl,
   TrackUrlAccessUseCaseImpl,
-} from './application/use-cases';
+} from './application/usecases';
 import { Url, UrlSchema, Access, AccessSchema } from './infrastructure/schemas';
 import { UrlsController } from './presentation/controller/urls.controller';
 import { UrlsCountGateway } from './presentation/gateways/urls-count.gateway';

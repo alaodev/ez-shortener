@@ -1,5 +1,5 @@
-import { CountUrlsOutput } from '../../domain/types/output/use-cases/count-urls.output';
-import { CountUrlsUseCase } from '../../domain/use-cases/count-urls.usecase';
+import { CountUrlsOutput } from '../../domain/types/output/usecases/count-urls.output';
+import { CountUrlsUseCase } from '../../domain/usecases/count-urls.usecase';
 import { CountUrlsRepository } from '../../domain/repositories/count-urls.repository';
 
 export class CountUrlsUseCaseImpl implements CountUrlsUseCase {

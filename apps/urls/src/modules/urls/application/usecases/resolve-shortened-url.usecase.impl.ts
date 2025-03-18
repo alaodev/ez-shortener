@@ -1,7 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { FindUrlByShortIdRepository } from '../../domain/repositories/find-url-by-short-id.repository';
-import { ResolveShortenedUrlOutput } from '../../domain/types/output/use-cases';
-import { ResolveShortenedUrlUseCase } from '../../domain/use-cases/resolve-shortened-url.usecase';
+import { ResolveShortenedUrlOutput } from '../../domain/types/output/usecases';
+import { ResolveShortenedUrlUseCase } from '../../domain/usecases/resolve-shortened-url.usecase';
 
 export class ResolveShortenedUrlUseCaseImpl
   implements ResolveShortenedUrlUseCase

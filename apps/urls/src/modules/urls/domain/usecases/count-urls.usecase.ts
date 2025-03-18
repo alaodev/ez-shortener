@@ -1,4 +1,4 @@
-import { CountUrlsOutput } from '../types/output/use-cases/count-urls.output';
+import { CountUrlsOutput } from '../types/output/usecases/count-urls.output';
 
 export abstract class CountUrlsUseCase {
   abstract execute(): Promise<CountUrlsOutput>;

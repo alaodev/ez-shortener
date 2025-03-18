@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import {
   CreateUserUseCaseImpl,
   FindUserByEmailUseCaseImpl,
-} from './application/use-cases';
+} from './application/usecases';
 import { User, UserSchema } from './infrastructure/schemas/user.schema';
 import {
   MongoCreateUserRepository,

@@ -1,5 +1,5 @@
-import { FindAllUserUrlsOutput } from '../../domain/types/output/use-cases';
-import { FindAllUserUrlsUseCase } from '../../domain/use-cases';
+import { FindAllUserUrlsOutput } from '../../domain/types/output/usecases';
+import { FindAllUserUrlsUseCase } from '../../domain/usecases';
 import { FindAllUrlsByOwnerRepository } from '../../domain/repositories/find-all-urls-by-owner.repository';
 
 export class FindAllUserUrlsUseCaseImpl implements FindAllUserUrlsUseCase {

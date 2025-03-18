@@ -10,7 +10,7 @@ import {
 import { Server } from 'socket.io';
 import { ChangeStream } from 'mongodb';
 import { Url as UrlSchema } from '../../infrastructure/schemas/url.schema';
-import { CountUrlsUseCase } from '../../domain/use-cases/count-urls.usecase';
+import { CountUrlsUseCase } from '../../domain/usecases/count-urls.usecase';
 
 @WebSocketGateway()
 @Injectable()

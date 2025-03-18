@@ -9,7 +9,7 @@ import { Body, Controller, Inject, Post, UsePipes } from '@nestjs/common';
 import {
   AuthenticateUserUseCase,
   RegisterUserUseCase,
-} from '../domain/use-cases';
+} from '../domain/usecases';
 
 @Controller('auth')
 export class AuthController {
