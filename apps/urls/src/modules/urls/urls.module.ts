@@ -2,6 +2,7 @@ import { MongooseModule } from '@ez-shortener/databases/nestjs-mongoose';
 import { Module } from '@nestjs/common';
 import {
   CountUrlsUseCaseImpl,
+  DeleteUserUrlUseCaseImpl,
   FindAllUserUrlsUseCaseImpl,
   ResolveShortenedUrlUseCaseImpl,
   ShortenUserUrlUseCaseImpl,
@@ -14,6 +15,7 @@ import {
   MongoCountUrlsRepository,
   MongoCreateAccessRepository,
   MongoCreateUrlRepository,
+  MongoDeleteUrlOwnerMatchRepository,
   MongoFindAllUrlsByOwnerRepository,
   MongoFindUrlByShortIdRepository,
 } from './infrastructure/repositories';
@@ -24,6 +26,7 @@ import {
   CountUrlsRepository,
   CreateAccessRepository,
   CreateUrlRepository,
+  DeleteUrlOwnerMatchRepository,
   FindUrlByShortIdRepository,
 } from './domain/repositories';
 
@@ -51,6 +54,10 @@ import {
     {
       provide: 'FindUrlByShortIdRepository',
       useClass: MongoFindUrlByShortIdRepository,
+    },
+    {
+      provide: 'DeleteUrlOwnerMatchRepository',
+      useClass: MongoDeleteUrlOwnerMatchRepository,
     },
     {
       provide: 'CountUrlsRepository',
@@ -101,6 +108,15 @@ import {
         'FindUrlByShortIdRepository',
         'CreateUrlRepository',
       ],
+    },
+    {
+      provide: 'DeleteUserUrlUseCase',
+      useFactory: (
+        deleteUrlOwnerMatchRepository: DeleteUrlOwnerMatchRepository,
+      ) => {
+        return new DeleteUserUrlUseCaseImpl(deleteUrlOwnerMatchRepository);
+      },
+      inject: ['DeleteUrlOwnerMatchRepository'],
     },
     {
       provide: 'CountUrlsUseCase',

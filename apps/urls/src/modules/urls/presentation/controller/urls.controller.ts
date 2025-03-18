@@ -8,6 +8,7 @@ import { ZodValidationPipe } from '@ez-shortener/pipes';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -17,6 +18,7 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import {
+  DeleteUserUrlUseCase,
   FindAllUserUrlsUseCase,
   ResolveShortenedUrlUseCase,
   ShortenUserUrlUseCase,
@@ -34,6 +36,8 @@ export class UrlsController {
     private readonly findAllUsersUrlsUseCase: FindAllUserUrlsUseCase,
     @Inject('ShortenUserUrlUseCase')
     private readonly shortenUserUrlUseCase: ShortenUserUrlUseCase,
+    @Inject('DeleteUserUrlUseCase')
+    private readonly deleteUserUrlUseCase: DeleteUserUrlUseCase,
   ) {}
 
   @Get(':shordId')
@@ -70,6 +74,16 @@ export class UrlsController {
     return this.shortenUserUrlUseCase.execute({
       originalUrl: originalUrl,
       owner: user.id,
+    });
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  deleteUserUrl(@Req() req: AuthenticatedRequest, @Param('id') id: string) {
+    const { user } = req;
+    return this.deleteUserUrlUseCase.execute({
+      urlId: id,
+      userId: user.id,
     });
   }
 }
