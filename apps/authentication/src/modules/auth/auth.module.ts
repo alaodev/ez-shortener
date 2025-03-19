@@ -1,48 +1,11 @@
 import { Module } from '@nestjs/common';
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './presentation/auth.controller';
-import {
-  AuthenticateUserUseCaseImpl,
-  RegisterUserUseCaseImpl,
-} from './application/usecases';
-import {
-  BcryptCompareService,
-  JwtSignService,
-} from './infrastructure/services';
-import {
-  CreateUserUseCase,
-  FindUserByEmailUseCase,
-} from '../users/domain/usecases';
-import { CompareService, SignService } from './domain/services';
+import { serviceProviders, usecaseProviders } from './infrastructure/providers';
 
 @Module({
   imports: [UsersModule],
   controllers: [AuthController],
-  providers: [
-    { provide: 'CompareService', useClass: BcryptCompareService },
-    { provide: 'SignService', useClass: JwtSignService },
-    {
-      provide: 'AuthenticateUserUseCase',
-      useFactory: (
-        findUserByEmailUseCase: FindUserByEmailUseCase,
-        compareService: CompareService,
-        signService: SignService,
-      ) => {
-        return new AuthenticateUserUseCaseImpl(
-          findUserByEmailUseCase,
-          compareService,
-          signService,
-        );
-      },
-      inject: ['FindUserByEmailUseCase', 'CompareService', 'SignService'],
-    },
-    {
-      provide: 'RegisterUserUseCase',
-      useFactory: (createUserUseCase: CreateUserUseCase) => {
-        return new RegisterUserUseCaseImpl(createUserUseCase);
-      },
-      inject: ['CreateUserUseCase'],
-    },
-  ],
+  providers: [...serviceProviders, ...usecaseProviders],
 })
 export class AuthModule {}
