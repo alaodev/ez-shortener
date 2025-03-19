@@ -10,10 +10,7 @@ export class DeleteUserUrlUseCaseImpl implements DeleteUserUrlUseCase {
   ) {}
 
   async execute(data: DeleteUserUrlInput): Promise<DeleteUserUrlOutput> {
-    const deletedUrl = await this.deleteUrlOwnerMatchRepository.deleteUrl({
-      id: data.urlId,
-      owner: data.userId,
-    });
+    const deletedUrl = await this.deleteUrlOwnerMatchRepository.deleteUrl(data);
     if (!deletedUrl) throw new NotFoundException('url not found');
     return {
       id: deletedUrl.id,

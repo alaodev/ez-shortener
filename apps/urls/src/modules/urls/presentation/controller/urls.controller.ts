@@ -82,8 +82,8 @@ export class UrlsController {
   deleteUserUrl(@Req() req: AuthenticatedRequest, @Param('id') id: string) {
     const { user } = req;
     return this.deleteUserUrlUseCase.execute({
-      urlId: id,
-      userId: user.id,
+      id: id,
+      owner: user.id,
     });
   }
 }
