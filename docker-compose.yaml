@@ -39,6 +39,7 @@ services:
     ports:
       - 3000:3000
       - 3001:3001
+      - 3002:3002
     volumes:
       - .:/home/node/app
     depends_on:
