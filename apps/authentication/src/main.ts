@@ -1,3 +1,4 @@
+import { HttpExceptionFilter } from '@ez-shortener/exceptions';
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
@@ -10,6 +11,7 @@ async function bootstrap() {
     process.exit(1);
   }
   const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(port, () => logger.log(`Server running on port ${port}`));
 }
 bootstrap();
