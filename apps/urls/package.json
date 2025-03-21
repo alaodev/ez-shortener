@@ -18,6 +18,7 @@
     "@ez-shortener/auth-guard": "*",
     "@ez-shortener/contracts": "*",
     "@ez-shortener/databases": "*",
+    "@ez-shortener/exceptions": "*",
     "@ez-shortener/pipes": "*",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.1",
