@@ -1,9 +1,9 @@
 import { ZodValidationPipe } from '@ez-shortener/pipes';
 import {
-  RegisterUserContract,
-  AuthenticateUserContract,
-  registerUserSchema,
-  authenticateUserSchema,
+  RegisterUserRequestBody,
+  AuthenticateUserRequestBody,
+  registerUserRequestBodySchema,
+  authenticateUserRequestBodySchema,
 } from '@ez-shortener/contracts';
 import {
   Body,
@@ -29,17 +29,17 @@ export class AuthController {
 
   @Post('signup')
   @HttpCode(201)
-  @UsePipes(new ZodValidationPipe(registerUserSchema))
-  async registerUser(@Body() registerUserContract: RegisterUserContract) {
-    return this.registerUserUseCase.execute(registerUserContract);
+  @UsePipes(new ZodValidationPipe(registerUserRequestBodySchema))
+  async registerUser(@Body() registerUserRequestBody: RegisterUserRequestBody) {
+    return this.registerUserUseCase.execute(registerUserRequestBody);
   }
 
   @Post('signin')
   @HttpCode(200)
-  @UsePipes(new ZodValidationPipe(authenticateUserSchema))
+  @UsePipes(new ZodValidationPipe(authenticateUserRequestBodySchema))
   async authenticateUser(
-    @Body() authenticateUserContract: AuthenticateUserContract,
+    @Body() authenticateUserRequestBody: AuthenticateUserRequestBody,
   ) {
-    return this.authenticateUserUseCase.execute(authenticateUserContract);
+    return this.authenticateUserUseCase.execute(authenticateUserRequestBody);
   }
 }
