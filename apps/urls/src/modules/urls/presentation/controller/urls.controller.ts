@@ -3,7 +3,10 @@ import {
   ExpressRequest,
   JwtAuthGuard,
 } from '@ez-shortener/auth-guard';
-import { ShortenUrlContract, shortenUrlSchema } from '@ez-shortener/contracts';
+import {
+  ShortenUrlRequestBody,
+  shortenUrlRequestBodySchema,
+} from '@ez-shortener/contracts';
 import { ZodValidationPipe } from '@ez-shortener/pipes';
 import {
   Body,
@@ -68,12 +71,12 @@ export class UrlsController {
   @Post('shorten')
   @HttpCode(201)
   @UseGuards(JwtAuthGuard)
-  @UsePipes(new ZodValidationPipe(shortenUrlSchema))
+  @UsePipes(new ZodValidationPipe(shortenUrlRequestBodySchema))
   shortenUrl(
     @Req() req: AuthenticatedRequest,
-    @Body() shortenUrlContract: ShortenUrlContract,
+    @Body() shortenUrlRequestBody: ShortenUrlRequestBody,
   ) {
-    const { originalUrl } = shortenUrlContract;
+    const { originalUrl } = shortenUrlRequestBody;
     const { user } = req;
     return this.shortenUserUrlUseCase.execute({
       originalUrl: originalUrl,
