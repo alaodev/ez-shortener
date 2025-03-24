@@ -1,20 +1,20 @@
 import { apiHandler } from './handler';
 
 export const useApi = () => {
-  async function get(path: string) {
-    return apiHandler(path, { method: 'GET' });
+  async function get<TResponse>(path: string) {
+    return apiHandler<null, TResponse>(path, { method: 'GET' });
   }
 
-  async function post(path: string, body: unknown) {
-    return apiHandler(path, { method: 'POST', body });
+  async function post<TBody, TResponse>(path: string, body: TBody) {
+    return apiHandler<TBody, TResponse>(path, { method: 'POST', body });
   }
 
-  async function put(path: string, body: unknown) {
-    return apiHandler(path, { method: 'PUT', body });
+  async function put<TBody, TResponse>(path: string, body: TBody) {
+    return apiHandler<TBody, TResponse>(path, { method: 'PUT', body });
   }
 
-  async function del(path: string) {
-    return apiHandler(path, { method: 'DELETE' });
+  async function del<TResponse>(path: string) {
+    return apiHandler<null, TResponse>(path, { method: 'DELETE' });
   }
 
   return { get, post, put, del };
