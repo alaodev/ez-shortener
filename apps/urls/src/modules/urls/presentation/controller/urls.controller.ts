@@ -10,6 +10,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Inject,
   Param,
   Post,
@@ -41,6 +42,7 @@ export class UrlsController {
   ) {}
 
   @Get(':shordId')
+  @HttpCode(200)
   async resolveShortenedUrl(
     @Req() req: ExpressRequest,
     @Param('shordId') shortId: string,
@@ -56,6 +58,7 @@ export class UrlsController {
   }
 
   @Get()
+  @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   findAllUserUrls(@Req() req: AuthenticatedRequest) {
     const { user } = req;
@@ -63,6 +66,7 @@ export class UrlsController {
   }
 
   @Post('shorten')
+  @HttpCode(201)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ZodValidationPipe(shortenUrlSchema))
   shortenUrl(
@@ -78,6 +82,7 @@ export class UrlsController {
   }
 
   @Delete(':id')
+  @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   deleteUserUrl(@Req() req: AuthenticatedRequest, @Param('id') id: string) {
     const { user } = req;
