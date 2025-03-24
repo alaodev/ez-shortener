@@ -6,12 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-
-export type ResponseError = {
-  statusCode: number;
-  message: string;
-  error: string;
-};
+import { ResponseError } from '../common';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -21,11 +16,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const statusCode = exception.getStatus();
     const message = exception.message;
     const error = HttpStatus[statusCode] || 'Unknown Error';
-    const responseError: ResponseError = {
-      statusCode,
-      message,
-      error,
-    };
+    const responseError = new ResponseError(statusCode, message, error);
     response.status(statusCode).json(responseError);
   }
 }
