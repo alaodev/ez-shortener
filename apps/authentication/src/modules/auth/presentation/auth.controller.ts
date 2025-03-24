@@ -5,7 +5,14 @@ import {
   registerUserSchema,
   authenticateUserSchema,
 } from '@ez-shortener/contracts';
-import { Body, Controller, Inject, Post, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Inject,
+  Post,
+  UsePipes,
+} from '@nestjs/common';
 import {
   AuthenticateUserUseCase,
   RegisterUserUseCase,
@@ -21,12 +28,14 @@ export class AuthController {
   ) {}
 
   @Post('signup')
+  @HttpCode(201)
   @UsePipes(new ZodValidationPipe(registerUserSchema))
   async registerUser(@Body() registerUserContract: RegisterUserContract) {
     return this.registerUserUseCase.execute(registerUserContract);
   }
 
   @Post('signin')
+  @HttpCode(200)
   @UsePipes(new ZodValidationPipe(authenticateUserSchema))
   async authenticateUser(
     @Body() authenticateUserContract: AuthenticateUserContract,
