@@ -42,12 +42,7 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input
-                  id="email"
-                  type="email"
-                  v-bind="componentField"
-                  required
-                />
+                <Input id="email" type="email" v-bind="componentField" />
               </FormControl>
             </FormItem>
           </FormField>
@@ -55,12 +50,7 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input
-                  id="password"
-                  type="password"
-                  v-bind="componentField"
-                  required
-                />
+                <Input id="password" type="password" v-bind="componentField" />
               </FormControl>
             </FormItem>
           </FormField>
