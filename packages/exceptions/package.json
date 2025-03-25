@@ -5,9 +5,18 @@
   "author": "alaodev",
   "private": true,
   "license": "UNLICENSED",
-  "main": "dist/main.js",
+  "types": "dist/types/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/main.js",
+      "require": "./dist/main.js",
+      "types": "./dist/types/main.d.ts"
+    }
+  },
+  "module": "./dist/esm/main.js",
   "scripts": {
-    "build": "nest build",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "nest build && npm run build:esm",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "debug": "nest start --debug --watch",
     "prod": "node dist/main",
