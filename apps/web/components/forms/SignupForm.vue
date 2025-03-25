@@ -4,7 +4,13 @@ import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 
 export type SubmitFormDataType = zod.infer<typeof signupSchemaValidator>;
+export type Props = {
+  disabled?: boolean;
+};
 
+withDefaults(defineProps<Props>(), {
+  disabled: false,
+});
 const emits = defineEmits<{
   (event: 'submit:form', data: SubmitFormDataType): void;
 }>();
@@ -66,7 +72,12 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input id="username" type="text" v-bind="componentField" />
+                  <Input
+                    id="username"
+                    type="text"
+                    v-bind="componentField"
+                    :disabled
+                  />
                 </FormControl>
               </FormItem>
             </FormField>
@@ -74,7 +85,12 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input id="email" type="email" v-bind="componentField" />
+                  <Input
+                    id="email"
+                    type="email"
+                    v-bind="componentField"
+                    :disabled
+                  />
                 </FormControl>
               </FormItem>
             </FormField>
@@ -86,6 +102,7 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
                     id="password"
                     type="password"
                     v-bind="componentField"
+                    :disabled
                   />
                 </FormControl>
               </FormItem>
@@ -98,13 +115,16 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
                     id="passwordConfirmation"
                     type="password"
                     v-bind="componentField"
+                    :disabled
                   />
                 </FormControl>
               </FormItem>
             </FormField>
           </div>
           <div class="flex flex-col gap-4">
-            <Button type="submit" class="w-full"> Create account </Button>
+            <Button type="submit" class="w-full" :disabled>
+              Create account
+            </Button>
             <div class="text-center text-sm">
               Already have an accoun?
               <NuxtLink to="/auth/signin" class="underline underline-offset-4">
