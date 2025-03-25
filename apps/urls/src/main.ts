@@ -1,3 +1,4 @@
+import * as cookieParser from 'cookie-parser';
 import { HttpExceptionFilter } from '@ez-shortener/exceptions';
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
@@ -12,6 +13,7 @@ async function bootstrap() {
   }
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.use(cookieParser());
   await app.listen(port, () => logger.log(`Server running on port ${port}`));
 }
 bootstrap();
