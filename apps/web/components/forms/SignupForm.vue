@@ -44,17 +44,24 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
 </script>
 
 <template>
-  <div class="flex flex-col gap-6">
-    <Card>
-      <CardHeader class="text-center">
-        <CardTitle class="text-xl"> Register </CardTitle>
-        <CardDescription>
-          Fill in your details below to sign up
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form @submit="onSubmit">
-          <div class="grid gap-6">
+  <Card class="overflow-hidden">
+    <CardContent class="grid p-0 md:grid-cols-2">
+      <div class="relative hidden bg-muted md:block">
+        <img
+          src="/placeholder.svg"
+          alt="Image"
+          class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        />
+      </div>
+      <form class="p-6 md:p-8" @submit="onSubmit">
+        <div class="flex flex-col gap-4">
+          <div class="text-center">
+            <h1 class="text-2xl font-bold">Let's register</h1>
+            <p class="text-balance text-muted-foreground">
+              Fill in your details below to sign up
+            </p>
+          </div>
+          <div class="flex flex-col gap-4 h-[350px]">
             <FormField v-slot="{ componentField }" name="username">
               <FormItem>
                 <FormLabel>Username</FormLabel>
@@ -95,16 +102,18 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
                 </FormControl>
               </FormItem>
             </FormField>
+          </div>
+          <div class="flex flex-col gap-4">
             <Button type="submit" class="w-full"> Create account </Button>
             <div class="text-center text-sm">
-              Already have an account?
+              Already have an accoun?
               <NuxtLink to="/auth/signin" class="underline underline-offset-4">
                 Sign in
               </NuxtLink>
             </div>
           </div>
-        </form>
-      </CardContent>
-    </Card>
-  </div>
+        </div>
+      </form>
+    </CardContent>
+  </Card>
 </template>
