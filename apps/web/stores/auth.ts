@@ -8,7 +8,7 @@ import type {
 export const useAuthStore = defineStore(
   'auth-store',
   function () {
-    const { post } = useApi();
+    const { post, get } = useApi();
 
     const loading = ref(false);
     const authenticated = ref(false);
@@ -49,11 +49,25 @@ export const useAuthStore = defineStore(
       }
     }
 
+    async function logoutUser() {
+      loading.value = true;
+      try {
+        await get('/auth/logout');
+        authenticated.value = false;
+      } catch (e) {
+        console.error(e);
+        throw e;
+      } finally {
+        loading.value = false;
+      }
+    }
+
     return {
       loading,
       authenticated,
       authenticateUser,
       registerUser,
+      logoutUser,
     };
   },
   { persist: { pick: ['authenticated'] } },
