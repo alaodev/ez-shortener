@@ -40,7 +40,7 @@ export class AuthController {
   }
 
   @Post('signin')
-  @HttpCode(200)
+  @HttpCode(204)
   @UsePipes(new ZodValidationPipe(authenticateUserRequestBodySchema))
   async authenticateUser(
     @Body() authenticateUserRequestBody: AuthenticateUserRequestBody,
@@ -54,7 +54,6 @@ export class AuthController {
       httpOnly: true,
       secure: env === 'production' || false,
     });
-    response.send('successfully logged in');
   }
 
   @Get('logout')

@@ -1,6 +1,5 @@
 import type {
   AuthenticateUserRequestBody,
-  AuthenticateUserResponse,
   RegisterUserRequestBody,
   RegisterUserResponse,
 } from '@ez-shortener/contracts';
@@ -16,10 +15,10 @@ export const useAuthStore = defineStore(
     async function authenticateUser(email: string, password: string) {
       loading.value = true;
       try {
-        await post<AuthenticateUserRequestBody, AuthenticateUserResponse>(
-          '/auth/signin',
-          { email, password },
-        );
+        await post<AuthenticateUserRequestBody, null>('/auth/signin', {
+          email,
+          password,
+        });
         authenticated.value = true;
       } catch (e) {
         console.error(e);

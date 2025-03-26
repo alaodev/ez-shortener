@@ -7,14 +7,6 @@ export const authenticateUserRequestBodySchema = z.object({
   password: z.string({ message: 'field is required' }),
 });
 
-export const authenticateUserResponseSchema = z.object({
-  accessToken: z.string(),
-});
-
 export type AuthenticateUserRequestBody = z.infer<
   typeof authenticateUserRequestBodySchema
->;
-
-export type AuthenticateUserResponse = z.infer<
-  typeof authenticateUserResponseSchema
 >;
