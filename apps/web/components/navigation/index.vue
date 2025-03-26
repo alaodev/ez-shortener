@@ -12,7 +12,9 @@
       <header
         class="flex items-center bg-background sticky top-0 px-3 h-[4rem]"
       >
-        <SidebarTrigger class="mr-auto" />
+        <div class="flex gap-2 mr-auto">
+          <slot name="leading-actions" />
+        </div>
         <div class="flex gap-2">
           <slot name="actions" />
         </div>
