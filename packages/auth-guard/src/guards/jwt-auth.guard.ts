@@ -19,7 +19,7 @@ export class JwtAuthGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest<AuthenticatedRequest>();
-    const token = request.headers.authorization?.split(' ')[1];
+    const token = request.cookies?.['access_token'];
     if (!token) throw new UnauthorizedException('access token not provided');
     try {
       const decoded: AuthenticatedUser = this.jwtService.verify(token);

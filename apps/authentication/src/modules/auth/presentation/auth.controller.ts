@@ -5,14 +5,17 @@ import {
   registerUserRequestBodySchema,
   authenticateUserRequestBodySchema,
 } from '@ez-shortener/contracts';
+import { ExpressResponse } from '@ez-shortener/auth-guard';
 import {
   Body,
   Controller,
   HttpCode,
   Inject,
   Post,
+  Response,
   UsePipes,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
   AuthenticateUserUseCase,
   RegisterUserUseCase,
@@ -25,6 +28,7 @@ export class AuthController {
     private readonly registerUserUseCase: RegisterUserUseCase,
     @Inject('AuthenticateUserUseCase')
     private readonly authenticateUserUseCase: AuthenticateUserUseCase,
+    private readonly configService: ConfigService,
   ) {}
 
   @Post('signup')
@@ -39,7 +43,17 @@ export class AuthController {
   @UsePipes(new ZodValidationPipe(authenticateUserRequestBodySchema))
   async authenticateUser(
     @Body() authenticateUserRequestBody: AuthenticateUserRequestBody,
+    @Response({ passthrough: true }) response: ExpressResponse,
   ) {
-    return this.authenticateUserUseCase.execute(authenticateUserRequestBody);
+    const env = this.configService.get<string>('ENVIRONMENT');
+    const { accessToken } = await this.authenticateUserUseCase.execute(
+      authenticateUserRequestBody,
+    );
+    console.log(env === 'production' || false, env);
+    response.cookie('access_token', accessToken, {
+      httpOnly: true,
+      secure: env === 'production' || false,
+    });
+    response.send('successfully logged in');
   }
 }

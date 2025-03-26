@@ -7,4 +7,7 @@ export type AuthenticatedUser = {
 
 export interface AuthenticatedRequest extends Request {
   user: AuthenticatedUser;
+  cookies: {
+    access_token?: string;
+  };
 }
