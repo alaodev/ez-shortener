@@ -1,5 +1,11 @@
+<script setup lang="ts">
+const navigationStore = useNavigationStore();
+
+const { sidebarOpen } = storeToRefs(navigationStore);
+</script>
+
 <template>
-  <SidebarProvider>
+  <SidebarProvider :open="sidebarOpen">
     <Sidebar class="border-none">
       <SidebarHeader>
         <slot name="sidebar-header" />
