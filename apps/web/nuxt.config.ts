@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
+    'pinia-plugin-persistedstate/nuxt',
     'shadcn-nuxt',
   ],
   colorMode: {
