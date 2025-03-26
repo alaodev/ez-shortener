@@ -63,7 +63,7 @@ services:
 
   kong-migrations-up:
     image: kong
-    command: kong migrations up
+    command: kong migrations bootstrap && kong migrations up
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
@@ -110,8 +110,6 @@ services:
       - 8445:8445
       - 8003:8003
       - 8004:8004
-    volumes:
-      - ./kong/declarative:/kong/declarative
     extra_hosts:
       - host.docker.internal:host-gateway
     depends_on:
