@@ -20,7 +20,7 @@ const { toast } = useToast();
 async function handleRegisterUser(data: SubmitFormDataType) {
   await registerUser(data);
   toast({ title: 'Good news', description: 'User created successfully!' });
-  navigateTo('/signin');
+  navigateTo('/');
 }
 </script>
 
