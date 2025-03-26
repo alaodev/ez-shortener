@@ -76,7 +76,7 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
             <Button type="submit" class="w-full" :disabled> Login </Button>
             <div class="text-center text-sm">
               Don&apos;t have an account?
-              <NuxtLink to="/auth/signup" class="underline underline-offset-4">
+              <NuxtLink to="/signup" class="underline underline-offset-4">
                 Sign up
               </NuxtLink>
             </div>

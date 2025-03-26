@@ -4,6 +4,12 @@ import SignupForm, {
 } from '@/components/forms/SignupForm.vue';
 import { useToast } from '@/components/ui/toast';
 
+definePageMeta({
+  auth: false,
+  name: 'signup',
+  path: '/signup',
+});
+
 const authStore = useAuthStore();
 
 const { loading } = storeToRefs(authStore);
@@ -14,7 +20,7 @@ const { toast } = useToast();
 async function handleRegisterUser(data: SubmitFormDataType) {
   await registerUser(data);
   toast({ title: 'Good news', description: 'User created successfully!' });
-  navigateTo('/auth/signin');
+  navigateTo('/signin');
 }
 </script>
 

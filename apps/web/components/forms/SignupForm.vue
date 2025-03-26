@@ -127,7 +127,7 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
             </Button>
             <div class="text-center text-sm">
               Already have an accoun?
-              <NuxtLink to="/auth/signin" class="underline underline-offset-4">
+              <NuxtLink to="/" class="underline underline-offset-4">
                 Sign in
               </NuxtLink>
             </div>
