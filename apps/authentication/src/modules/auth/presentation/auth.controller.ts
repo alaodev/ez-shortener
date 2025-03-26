@@ -9,6 +9,7 @@ import { ExpressResponse } from '@ez-shortener/auth-guard';
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   Inject,
   Post,
@@ -49,11 +50,20 @@ export class AuthController {
     const { accessToken } = await this.authenticateUserUseCase.execute(
       authenticateUserRequestBody,
     );
-    console.log(env === 'production' || false, env);
     response.cookie('access_token', accessToken, {
       httpOnly: true,
       secure: env === 'production' || false,
     });
     response.send('successfully logged in');
+  }
+
+  @Get('logout')
+  @HttpCode(204)
+  logout(@Response({ passthrough: true }) response: ExpressResponse) {
+    const env = this.configService.get<string>('ENVIRONMENT');
+    response.clearCookie('access_token', {
+      httpOnly: true,
+      secure: env === 'production' || false,
+    });
   }
 }
