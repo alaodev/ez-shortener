@@ -23,6 +23,7 @@ export async function apiHandler<TBody = unknown, TResponse = unknown>(
       method,
       headers,
       body: body ? JSON.stringify(body) : undefined,
+      credentials: 'include',
       onResponseError: async ({ response }) => {
         if (!response.ok) {
           if (response._data.name === 'ResponseError') {
