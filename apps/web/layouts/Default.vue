@@ -2,14 +2,25 @@
 import LogoutButton from '@/components/utils/LogoutButton.vue';
 import ThemeSwitcher from '@/components/utils/ThemeSwitcher.vue';
 import SidebarToggleButton from '@/components/utils/SidebarToggleButton.vue';
-import NavigateToShortenButton from '@/components/utils/NavigateToShortenButton.vue';
+import NavigateToButton from '@/components/utils/NavigateToButton.vue';
+
+const route = useRoute();
+
+const filteredNavs = computed(() =>
+  navs.filter((nav) => nav.to !== route.path),
+);
 </script>
 
 <template>
   <Navigation>
     <template #leading-actions>
       <SidebarToggleButton />
-      <NavigateToShortenButton />
+      <NavigateToButton
+        v-for="nav of filteredNavs"
+        :key="nav.to"
+        :to="nav.to"
+        :icon="nav.icon"
+      />
     </template>
     <template #actions>
       <ThemeSwitcher />
