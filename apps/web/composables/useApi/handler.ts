@@ -1,6 +1,5 @@
 import { ResponseError } from '@ez-shortener/exceptions';
 import { useToast } from '@/components/ui/toast';
-import { capitalizeString } from '@/util/formatters';
 import { resolveHeaders } from './headers';
 
 type HandlerOptions<TBody> = {
