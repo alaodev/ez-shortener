@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     public: {
       baseUrl: '',
       authApiKey: '',
+      urlsApiKey: '',
     },
   },
 });
