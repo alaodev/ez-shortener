@@ -46,6 +46,8 @@ services:
       - mongo-init
     networks:
       - mongo-network
+    extra_hosts:
+      - host.docker.internal:host-gateway
   
   kong-database:
     image: postgres:13-alpine
