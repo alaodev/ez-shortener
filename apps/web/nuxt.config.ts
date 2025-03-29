@@ -28,4 +28,9 @@ export default defineNuxtConfig({
       urlsApiKey: '',
     },
   },
+  vite: {
+    server: {
+      allowedHosts: ['host.docker.internal'],
+    },
+  },
 });
