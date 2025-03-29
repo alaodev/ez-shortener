@@ -11,7 +11,7 @@ definePageMeta({
 
 const urlsStore = useUrlsStore();
 
-const { loading, shortenedUrl } = storeToRefs(urlsStore);
+const { loadingShortenUrl: loading, shortenedUrl } = storeToRefs(urlsStore);
 
 const { shortenUrl, resetStore } = urlsStore;
 
