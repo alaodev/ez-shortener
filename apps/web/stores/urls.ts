@@ -1,6 +1,7 @@
 import type {
   DeleteUserUrlResponse,
   FindAllUserUrlsResponse,
+  ResolveShortenedUrlResponse,
   ShortenUrlRequestBody,
   ShortenUrlResponse,
 } from '@ez-shortener/contracts';
@@ -10,6 +11,7 @@ export const useUrlsStore = defineStore('urls-store', function () {
 
   const loadingShortenUrl = ref(false);
   const loadingGetUrls = ref(false);
+  const loadingGetUrlByShortId = ref(false);
   const loadingDeleteUrl = ref(false);
   const urls = ref<FindAllUserUrlsResponse>([]);
   const shortenedUrl = ref('');
@@ -34,6 +36,21 @@ export const useUrlsStore = defineStore('urls-store', function () {
       setTimeout(() => {
         loadingShortenUrl.value = false;
       }, remainingTime);
+    }
+  }
+
+  async function getUrlByShortId(shortId: string) {
+    loadingGetUrlByShortId.value = true;
+    try {
+      const findedUrl = await get<ResolveShortenedUrlResponse>(
+        `/urls/${shortId}`,
+      );
+      return findedUrl;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    } finally {
+      loadingGetUrlByShortId.value = false;
     }
   }
 
@@ -73,11 +90,13 @@ export const useUrlsStore = defineStore('urls-store', function () {
   return {
     loadingShortenUrl,
     loadingGetUrls,
+    loadingGetUrlByShortId,
     loadingDeleteUrl,
     urls,
     shortenedUrl,
     shortenUrl,
     getUrls,
+    getUrlByShortId,
     deleteUrl,
     resetStore,
   };
