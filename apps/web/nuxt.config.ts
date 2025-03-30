@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     ['@pinia/nuxt', { autoImports: ['defineStore', 'storeToRefs'] }],
+    '@formkit/auto-animate/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
