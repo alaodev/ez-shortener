@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ShortenedUrlsActions from './ShortenedUrlsActions.vue';
+
 const runtimeConfig = useRuntimeConfig();
 const urlsStore = useUrlsStore();
 
@@ -29,6 +31,7 @@ const shortenedUrls = computed(() =>
               </span>
             </NuxtLink>
           </SidebarMenuButton>
+          <ShortenedUrlsActions :shortened-url-id="shortenedUrl.id" />
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroupContent>
