@@ -19,7 +19,7 @@ const shortenedUrls = computed(() =>
 <template>
   <SidebarGroup>
     <SidebarGroupContent>
-      <SidebarMenu>
+      <SidebarMenu v-auto-animate="{ duration: 1000 }">
         <SidebarMenuItem
           v-for="shortenedUrl of shortenedUrls"
           :key="shortenedUrl.id"
