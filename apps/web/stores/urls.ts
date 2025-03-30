@@ -1,14 +1,16 @@
 import type {
+  DeleteUserUrlResponse,
   FindAllUserUrlsResponse,
   ShortenUrlRequestBody,
   ShortenUrlResponse,
 } from '@ez-shortener/contracts';
 
 export const useUrlsStore = defineStore('urls-store', function () {
-  const { post, get } = useApi();
+  const { post, get, del } = useApi();
 
   const loadingShortenUrl = ref(false);
   const loadingGetUrls = ref(false);
+  const loadingDeleteUrl = ref(false);
   const urls = ref<FindAllUserUrlsResponse>([]);
   const shortenedUrl = ref('');
 
@@ -49,6 +51,19 @@ export const useUrlsStore = defineStore('urls-store', function () {
     }
   }
 
+  async function deleteUrl(id: string) {
+    loadingDeleteUrl.value = true;
+    try {
+      const deletedUrl = await del<DeleteUserUrlResponse>(`/urls/${id}`);
+      urls.value = urls.value.filter((url) => url.id !== deletedUrl.id);
+    } catch (e) {
+      console.error(e);
+      throw e;
+    } finally {
+      loadingDeleteUrl.value = false;
+    }
+  }
+
   async function resetStore() {
     loadingShortenUrl.value = false;
     loadingGetUrls.value = false;
@@ -58,10 +73,12 @@ export const useUrlsStore = defineStore('urls-store', function () {
   return {
     loadingShortenUrl,
     loadingGetUrls,
+    loadingDeleteUrl,
     urls,
     shortenedUrl,
     shortenUrl,
     getUrls,
+    deleteUrl,
     resetStore,
   };
 });
