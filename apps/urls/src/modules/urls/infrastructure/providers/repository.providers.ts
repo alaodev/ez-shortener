@@ -5,6 +5,7 @@ import {
   MongoCreateUrlRepository,
   MongoDeleteUrlOwnerMatchRepository,
   MongoFindAllUrlsByOwnerRepository,
+  MongoFindAllUserUrlAccessRepository,
   MongoFindUrlByShortIdRepository,
 } from '../repositories';
 import { NanoidGenerateIdentifierService } from '../services/nanoid-generate-identifier.service';
@@ -17,6 +18,10 @@ export const repositoryProviders: Provider[] = [
   {
     provide: 'FindAllUrlsByOwnerRepository',
     useClass: MongoFindAllUrlsByOwnerRepository,
+  },
+  {
+    provide: 'FindAllUserUrlAccessRepository',
+    useClass: MongoFindAllUserUrlAccessRepository,
   },
   {
     provide: 'CreateUrlRepository',

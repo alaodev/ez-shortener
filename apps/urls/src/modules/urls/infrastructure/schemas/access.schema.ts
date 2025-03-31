@@ -15,6 +15,12 @@ export class Access {
 
   @Prop({ required: true, type: Types.ObjectId, ref: 'Url' })
   url: Url;
+
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 
 export const AccessSchema = SchemaFactory.createForClass(Access);
