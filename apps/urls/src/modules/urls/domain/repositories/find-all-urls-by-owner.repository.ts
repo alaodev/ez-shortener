@@ -3,5 +3,5 @@ import { FindAllUrlsByOwnerRepositoryOutput } from '../types/output/repositories
 export abstract class FindAllUrlsByOwnerRepository {
   abstract findAllUrlsByOwner(
     ownerId: string,
-  ): Promise<FindAllUrlsByOwnerRepositoryOutput[]>;
+  ): Promise<FindAllUrlsByOwnerRepositoryOutput>;
 }

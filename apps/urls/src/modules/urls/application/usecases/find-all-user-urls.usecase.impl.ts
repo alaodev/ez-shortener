@@ -7,7 +7,7 @@ export class FindAllUserUrlsUseCaseImpl implements FindAllUserUrlsUseCase {
     private readonly findAllUrlsByOwnerRepository: FindAllUrlsByOwnerRepository,
   ) {}
 
-  async execute(userId: string): Promise<FindAllUserUrlsOutput[]> {
+  async execute(userId: string): Promise<FindAllUserUrlsOutput> {
     return this.findAllUrlsByOwnerRepository.findAllUrlsByOwner(userId);
   }
 }

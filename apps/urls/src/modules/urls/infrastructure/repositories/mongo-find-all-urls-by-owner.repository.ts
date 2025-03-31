@@ -14,7 +14,7 @@ export class MongoFindAllUrlsByOwnerRepository
 
   async findAllUrlsByOwner(
     ownerId: string,
-  ): Promise<FindAllUrlsByOwnerRepositoryOutput[]> {
+  ): Promise<FindAllUrlsByOwnerRepositoryOutput> {
     const foundUrls = await this.urlModel.find({
       owner: new Types.ObjectId(ownerId),
     });
