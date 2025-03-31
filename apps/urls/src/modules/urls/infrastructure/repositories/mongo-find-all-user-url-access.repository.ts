@@ -1,7 +1,7 @@
 import { Model, Types } from '@ez-shortener/databases/mongoose';
 import { InjectModel } from '@ez-shortener/databases/nestjs-mongoose';
 import { Injectable } from '@nestjs/common';
-import { Url as UrlSchema, AccessDocument } from '../schemas';
+import { Url as UrlSchema, AccessDocument } from '../database/schemas';
 import { Url } from '../../domain/entities/url.entity';
 import { FindAllUserUrlAccessRepository } from '../../domain/repositories/find-all-user-url-access.repository';
 import { FindAllUserUrlAccessRepositoryOutput } from '../../domain/types/output/repositories/find-all-user-url-access-repository.output';

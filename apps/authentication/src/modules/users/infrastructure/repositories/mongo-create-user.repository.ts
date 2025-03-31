@@ -1,7 +1,7 @@
 import { Model } from '@ez-shortener/databases/mongoose';
 import { InjectModel } from '@ez-shortener/databases/nestjs-mongoose';
 import { Injectable } from '@nestjs/common';
-import { User as UserSchema } from '../schemas/user.schema';
+import { User as UserSchema } from '../database/schemas/user.schema';
 import { User } from '../../domain/entities/user.entity';
 import { CreateUserRepository } from '../../domain/repositories/create-user.repository';
 import { CreateUserRepositoryOutput } from '../../domain/types/outputs/repositories/create-user-repository.output';

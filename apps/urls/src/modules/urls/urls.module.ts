@@ -9,7 +9,7 @@ import {
   Access,
   AccessDocument,
   AccessSchema,
-} from './infrastructure/schemas';
+} from './infrastructure/database/schemas';
 import {
   gatewayProviders,
   repositoryProviders,

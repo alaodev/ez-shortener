@@ -1,7 +1,7 @@
 import { Model, Types } from '@ez-shortener/databases/mongoose';
 import { InjectModel } from '@ez-shortener/databases/nestjs-mongoose';
 import { Injectable } from '@nestjs/common';
-import { Url as UrlSchema } from '../schemas/url.schema';
+import { Url as UrlSchema } from '../database/schemas/url.schema';
 import { Url } from '../../domain/entities/url.entity';
 import { DeleteUrlOwnerMatchRepository } from '../../domain/repositories/delete-url-owner-match.repository';
 import { DeleteUrlOwnerMatchRepositoryOutput } from '../../domain/types/output/repositories/delete-url-owner-match-repository.output';

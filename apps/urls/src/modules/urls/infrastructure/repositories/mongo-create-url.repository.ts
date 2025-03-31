@@ -1,7 +1,7 @@
 import { Model, Types } from '@ez-shortener/databases/mongoose';
 import { InjectModel } from '@ez-shortener/databases/nestjs-mongoose';
 import { Injectable } from '@nestjs/common';
-import { Url as UrlSchema } from '../schemas/url.schema';
+import { Url as UrlSchema } from '../database/schemas/url.schema';
 import { Url } from '../../domain/entities/url.entity';
 import { CreateUrlRepository } from '../../domain/repositories/create-url.repository';
 import { CreateUrlRepositoryOutput } from '../../domain/types/output/repositories/create-url-repository.output';

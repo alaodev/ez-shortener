@@ -4,7 +4,10 @@ import {
   CreateUserUseCaseImpl,
   FindUserByEmailUseCaseImpl,
 } from './application/usecases';
-import { User, UserSchema } from './infrastructure/schemas/user.schema';
+import {
+  User,
+  UserSchema,
+} from './infrastructure/database/schemas/user.schema';
 import {
   MongoCreateUserRepository,
   MongoFindUserByEmailRepository,

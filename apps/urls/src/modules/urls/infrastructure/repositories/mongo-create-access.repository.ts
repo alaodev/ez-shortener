@@ -1,7 +1,7 @@
 import { Model, Types } from '@ez-shortener/databases/mongoose';
 import { InjectModel } from '@ez-shortener/databases/nestjs-mongoose';
 import { Injectable } from '@nestjs/common';
-import { Access as AccessSchema } from '../schemas/access.schema';
+import { Access as AccessSchema } from '../database/schemas/access.schema';
 import { Access } from '../../domain/entities/access.entity';
 import { CreateAccessRepository } from '../../domain/repositories/create-access.repository';
 import { CreateAccessRepositoryOutput } from '../../domain/types/output/repositories/create-access-repository.output';
