@@ -24,6 +24,6 @@ export class CreateUserUseCaseImpl implements CreateUserUseCase {
     const encryptedPassword = await this.hashingService.hash(password);
     const user = new User({ username, email, password: encryptedPassword });
     const createdUser = await this.createUserRepository.createUser(user);
-    return createdUser;
+    return { id: createdUser.id };
   }
 }

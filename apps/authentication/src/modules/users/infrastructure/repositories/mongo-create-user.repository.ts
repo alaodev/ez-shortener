@@ -18,6 +18,9 @@ export class MongoCreateUserRepository implements CreateUserRepository {
       id: createdUser._id.toString(),
       username: createdUser.username,
       email: createdUser.email,
+      password: createdUser.password,
+      createdAt: createdUser.createdAt,
+      updatedAt: createdUser.updatedAt,
     };
   }
 }
