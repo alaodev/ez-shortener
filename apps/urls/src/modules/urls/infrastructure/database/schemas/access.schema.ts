@@ -13,6 +13,18 @@ export class Access {
   @Prop({ required: true })
   address: string;
 
+  @Prop({ required: false })
+  browserName: string;
+
+  @Prop({ required: false })
+  browserVersion: string;
+
+  @Prop({ required: false })
+  osName: string;
+
+  @Prop({ required: false })
+  osVersion: string;
+
   @Prop({ required: true, type: Types.ObjectId, ref: 'Url' })
   url: Url;
 
