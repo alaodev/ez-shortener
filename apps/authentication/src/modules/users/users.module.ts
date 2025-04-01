@@ -1,14 +1,10 @@
-import { MongooseModule } from '@ez-shortener/databases/nestjs-mongoose';
 import { Module } from '@nestjs/common';
-import { CreateUserUseCaseImpl } from './application/usecases';
-import {
-  User,
-  UserSchema,
-} from './infrastructure/database/schemas/user.schema';
+import { CreateUserUseCaseImpl } from './application/usecases/create-user.usecase.impl';
 import {
   MongoCreateUserRepository,
   MongoFindUserByEmailRepository,
 } from './infrastructure/repositories';
+import { UserModelModule } from './infrastructure/database/models/user.model.module';
 import { BcryptHashingService } from './infrastructure/services/bcrypt-hashing.service';
 import {
   CreateUserRepository,
@@ -17,9 +13,7 @@ import {
 import { HashingService } from './domain/services/hashing.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-  ],
+  imports: [UserModelModule],
   providers: [
     {
       provide: 'FindUserByEmailRepository',
