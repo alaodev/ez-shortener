@@ -1,9 +1,6 @@
 import { MongooseModule } from '@ez-shortener/databases/nestjs-mongoose';
 import { Module } from '@nestjs/common';
-import {
-  CreateUserUseCaseImpl,
-  FindUserByEmailUseCaseImpl,
-} from './application/usecases';
+import { CreateUserUseCaseImpl } from './application/usecases';
 import {
   User,
   UserSchema,
@@ -49,14 +46,7 @@ import { HashingService } from './domain/services/hashing.service';
         'HashingService',
       ],
     },
-    {
-      provide: 'FindUserByEmailUseCase',
-      useFactory: (findUserByEmailRepository: FindUserByEmailRepository) => {
-        return new FindUserByEmailUseCaseImpl(findUserByEmailRepository);
-      },
-      inject: ['FindUserByEmailRepository'],
-    },
   ],
-  exports: ['CreateUserUseCase', 'FindUserByEmailUseCase'],
+  exports: ['CreateUserUseCase'],
 })
 export class UsersModule {}

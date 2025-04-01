@@ -1,8 +1,6 @@
 import { Provider } from '@nestjs/common';
-import {
-  CreateUserUseCase,
-  FindUserByEmailUseCase,
-} from '../../../users/domain/usecases';
+import { CreateUserUseCase } from '../../../users/domain/usecases/create-user.usecase';
+import { FindUserByEmailRepository } from '../../../users/domain/repositories/find-user-by-email.repository';
 import { CompareService, SignService } from '../../domain/services';
 import {
   AuthenticateUserUseCaseImpl,
@@ -13,17 +11,17 @@ export const usecaseProviders: Provider[] = [
   {
     provide: 'AuthenticateUserUseCase',
     useFactory: (
-      findUserByEmailUseCase: FindUserByEmailUseCase,
+      findUserByEmailRepository: FindUserByEmailRepository,
       compareService: CompareService,
       signService: SignService,
     ) => {
       return new AuthenticateUserUseCaseImpl(
-        findUserByEmailUseCase,
+        findUserByEmailRepository,
         compareService,
         signService,
       );
     },
-    inject: ['FindUserByEmailUseCase', 'CompareService', 'SignService'],
+    inject: ['FindUserByEmailRepository', 'CompareService', 'SignService'],
   },
   {
     provide: 'RegisterUserUseCase',

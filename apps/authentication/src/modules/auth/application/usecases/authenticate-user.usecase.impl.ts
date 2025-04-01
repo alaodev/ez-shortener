@@ -2,19 +2,20 @@ import { UnauthorizedException } from '@nestjs/common';
 import { AuthenticateUserInput } from '../../domain/types/input/usecases/authenticate-user.input';
 import { AuthenticateUserOutput } from '../../domain/types/output/uscases/authenticate-user.output';
 import { AuthenticateUserUseCase } from '../../domain/usecases/authenticate-user.usecase';
-import { FindUserByEmailUseCase } from '../../../users/domain/usecases/find-user-by-email.usecase';
+import { FindUserByEmailRepository } from '../../../users/domain/repositories/find-user-by-email.repository';
 import { CompareService, SignService } from '../../domain/services';
 
 export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
   constructor(
-    private readonly findUserByEmailUseCase: FindUserByEmailUseCase,
+    private readonly findUserByEmailRepository: FindUserByEmailRepository,
     private readonly compareService: CompareService,
     private readonly signService: SignService,
   ) {}
 
   async execute(data: AuthenticateUserInput): Promise<AuthenticateUserOutput> {
     const { email, password } = data;
-    const foundUser = await this.findUserByEmailUseCase.execute(email);
+    const foundUser =
+      await this.findUserByEmailRepository.findUserByEmail(email);
     if (!foundUser)
       throw new UnauthorizedException('invalid email or password');
     const { id, username, password: encryptedPassword } = foundUser;
