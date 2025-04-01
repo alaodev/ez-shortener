@@ -2,7 +2,6 @@ import { Model } from '@ez-shortener/databases/mongoose';
 import { InjectModel } from '@ez-shortener/databases/nestjs-mongoose';
 import { Injectable } from '@nestjs/common';
 import { User as UserSchema } from '../database/schemas/user.schema';
-import { User } from '../../domain/entities/user.entity';
 import { FindUserByEmailRepository } from '../../domain/repositories/find-user-by-email.repository';
 import { FindUserByEmailRepositoryOutput } from '../../domain/types/outputs/repositories/find-user-by-email-repository.output';
 
@@ -10,7 +9,9 @@ import { FindUserByEmailRepositoryOutput } from '../../domain/types/outputs/repo
 export class MongoFindUserByEmailRepository
   implements FindUserByEmailRepository
 {
-  constructor(@InjectModel(UserSchema.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(UserSchema.name) private userModel: Model<UserSchema>,
+  ) {}
 
   async findUserByEmail(
     email: string,
