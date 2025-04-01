@@ -17,6 +17,12 @@ export class Url {
 
   @Prop({ required: true, type: Types.ObjectId })
   owner: string;
+
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 
 export const UrlSchema = SchemaFactory.createForClass(Url);
