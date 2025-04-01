@@ -8,6 +8,7 @@ export type Props = {
   modelValue?: string;
   shortenedUrl?: string;
   loading?: boolean;
+  resettable?: boolean;
 };
 
 const props = defineProps<Props>();
@@ -59,7 +60,7 @@ async function handleCopyToClipboard() {
       />
     </div>
     <Button
-      v-if="props.shortenedUrl && !props.loading"
+      v-if="props.resettable && props.shortenedUrl && !props.loading"
       class="rounded-full"
       size="icon"
       variant="ghost"

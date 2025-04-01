@@ -50,6 +50,7 @@ function handleSubmitForm() {
       v-model="originalUrl"
       :shortened-url="props.shortenedUrl"
       :loading="props.loading"
+      resettable
       @reset:input="handleResetInput"
     />
   </form>
