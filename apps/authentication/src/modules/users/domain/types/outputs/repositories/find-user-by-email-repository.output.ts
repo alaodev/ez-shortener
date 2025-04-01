@@ -3,4 +3,6 @@ export type FindUserByEmailRepositoryOutput = {
   username: string;
   email: string;
   password: string;
+  createdAt: Date;
+  updatedAt: Date;
 };

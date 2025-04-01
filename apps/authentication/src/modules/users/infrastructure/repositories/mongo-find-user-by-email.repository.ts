@@ -23,6 +23,8 @@ export class MongoFindUserByEmailRepository
       username: foundUser.username,
       email: foundUser.email,
       password: foundUser.password,
+      createdAt: foundUser.createdAt,
+      updatedAt: foundUser.updatedAt,
     };
   }
 }
