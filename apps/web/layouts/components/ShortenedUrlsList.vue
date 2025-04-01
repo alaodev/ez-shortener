@@ -11,7 +11,7 @@ const shortenedUrls = computed(() =>
   urls.value.map((url) => ({
     id: url.id,
     originalUrl: url.originalUrl,
-    shortenedUrl: `${domainUrl}/${url.shortId}`,
+    shortenedUrl: `${domainUrl}${url.shortId}`,
   })),
 );
 </script>
@@ -31,7 +31,10 @@ const shortenedUrls = computed(() =>
               </span>
             </NuxtLink>
           </SidebarMenuButton>
-          <ShortenedUrlsActions :shortened-url-id="shortenedUrl.id" />
+          <ShortenedUrlsActions
+            :shortened-url-id="shortenedUrl.id"
+            :shortened-url="shortenedUrl.shortenedUrl"
+          />
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroupContent>
