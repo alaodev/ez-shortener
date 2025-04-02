@@ -16,7 +16,7 @@ export class Url {
   shortId: string;
 
   @Prop({ required: true, type: Types.ObjectId })
-  owner: string;
+  owner: Types.ObjectId;
 
   @Prop()
   createdAt: Date;

@@ -4,7 +4,6 @@ import {
   SchemaFactory,
 } from '@ez-shortener/databases/nestjs-mongoose';
 import { HydratedDocument, Types } from '@ez-shortener/databases/mongoose';
-import { Url } from './url.schema';
 
 export type AccessDocument = HydratedDocument<Access>;
 
@@ -26,7 +25,7 @@ export class Access {
   osVersion: string;
 
   @Prop({ required: true, type: Types.ObjectId, ref: 'Url' })
-  url: Url;
+  url: Types.ObjectId;
 
   @Prop()
   createdAt: Date;

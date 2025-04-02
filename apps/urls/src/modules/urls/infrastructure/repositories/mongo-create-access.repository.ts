@@ -22,7 +22,7 @@ export class MongoCreateAccessRepository implements CreateAccessRepository {
     return {
       id: createdAccess._id.toString(),
       address: createdAccess.address,
-      url: access.url,
+      url: createdAccess.url.toString(),
     };
   }
 }
