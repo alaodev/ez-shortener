@@ -28,6 +28,10 @@ export class ShortenUserUrlUseCaseImpl implements ShortenUserUrlUseCase {
       owner,
     });
     const createdUrl = await this.createUrlRepository.createUrl(url);
-    return createdUrl;
+    return {
+      id: createdUrl.id,
+      originalUrl: createdUrl.originalUrl,
+      shortId: createdUrl.shortId,
+    };
   }
 }

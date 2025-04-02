@@ -3,4 +3,6 @@ export type CreateUrlRepositoryOutput = {
   originalUrl: string;
   shortId: string;
   owner: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
