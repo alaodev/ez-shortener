@@ -24,6 +24,7 @@ import {
 import { UAParser } from 'ua-parser-js';
 import {
   DeleteUserUrlUseCase,
+  FindAllUserAccessUseCase,
   FindAllUserUrlAccessUseCase,
   FindAllUserUrlsUseCase,
   ResolveShortenedUrlUseCase,
@@ -40,6 +41,8 @@ export class UrlsController {
     private readonly trackUrlAccessUseCase: TrackUrlAccessUseCase,
     @Inject('FindAllUserUrlsUseCase')
     private readonly findAllUsersUrlsUseCase: FindAllUserUrlsUseCase,
+    @Inject('FindAllUserAccessUseCase')
+    private readonly findAllUserAccessUseCase: FindAllUserAccessUseCase,
     @Inject('FindAllUserUrlAccessUseCase')
     private readonly findAllUserUrlAccessUseCase: FindAllUserUrlAccessUseCase,
     @Inject('ShortenUserUrlUseCase')
@@ -79,6 +82,14 @@ export class UrlsController {
   findAllUserUrls(@Req() req: AuthenticatedRequest) {
     const { user } = req;
     return this.findAllUsersUrlsUseCase.execute(user.id);
+  }
+
+  @Get('access/findall')
+  @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
+  findAllUserAccess(@Req() req: AuthenticatedRequest) {
+    const { user } = req;
+    return this.findAllUserAccessUseCase.execute(user.id);
   }
 
   @Get('access/:urlId')

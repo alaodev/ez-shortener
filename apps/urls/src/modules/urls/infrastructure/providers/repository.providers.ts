@@ -5,6 +5,7 @@ import {
   MongoCreateUrlRepository,
   MongoDeleteUrlOwnerMatchRepository,
   MongoFindAllUrlsByOwnerRepository,
+  MongoFindAllUserAccessRepository,
   MongoFindAllUserUrlAccessRepository,
   MongoFindUrlByShortIdRepository,
 } from '../repositories';
@@ -18,6 +19,10 @@ export const repositoryProviders: Provider[] = [
   {
     provide: 'FindAllUrlsByOwnerRepository',
     useClass: MongoFindAllUrlsByOwnerRepository,
+  },
+  {
+    provide: 'FindAllUserAccessRepository',
+    useClass: MongoFindAllUserAccessRepository,
   },
   {
     provide: 'FindAllUserUrlAccessRepository',

@@ -1,5 +1,6 @@
 export * from './count-urls.usecase';
 export * from './delete-user-url.usecase';
+export * from './find-all-user-access.usecase';
 export * from './find-all-user-url-access.usecase';
 export * from './find-all-user-urls.usecase';
 export * from './resolve-shortened-url.usecase';

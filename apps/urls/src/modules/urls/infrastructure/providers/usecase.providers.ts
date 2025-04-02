@@ -4,6 +4,7 @@ import {
   CreateAccessRepository,
   CreateUrlRepository,
   DeleteUrlOwnerMatchRepository,
+  FindAllUserAccessRepository,
   FindAllUserUrlAccessRepository,
   FindUrlByShortIdRepository,
 } from '../../domain/repositories';
@@ -12,6 +13,7 @@ import { GenerateIdentifierService } from '../../domain/services/ generate-ident
 import {
   CountUrlsUseCaseImpl,
   DeleteUserUrlUseCaseImpl,
+  FindAllUserAccessUseCaseImpl,
   FindAllUserUrlAccessUseCaseImpl,
   FindAllUserUrlsUseCaseImpl,
   ResolveShortenedUrlUseCaseImpl,
@@ -42,6 +44,13 @@ export const usecaseProviders: Provider[] = [
       return new FindAllUserUrlsUseCaseImpl(findAllUrlsByOwnerRepository);
     },
     inject: ['FindAllUrlsByOwnerRepository'],
+  },
+  {
+    provide: 'FindAllUserAccessUseCase',
+    useFactory: (findAllUserAccessRepository: FindAllUserAccessRepository) => {
+      return new FindAllUserAccessUseCaseImpl(findAllUserAccessRepository);
+    },
+    inject: ['FindAllUserAccessRepository'],
   },
   {
     provide: 'FindAllUserUrlAccessUseCase',
