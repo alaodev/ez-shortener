@@ -7,11 +7,11 @@ import {
   serviceProviders,
   usecaseProviders,
 } from './infrastructure/providers';
-import { UrlsController } from './presentation/controller/urls.controller';
+import { AccessController, UrlsController } from './presentation/controller';
 
 @Module({
   imports: [ModelsModule],
-  controllers: [UrlsController],
+  controllers: [AccessController, UrlsController],
   providers: [
     ...repositoryProviders,
     ...usecaseProviders,
