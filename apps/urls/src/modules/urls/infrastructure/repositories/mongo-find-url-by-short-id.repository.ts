@@ -22,6 +22,8 @@ export class MongoFindUrlByShortIdRepository
       id: foundUrl._id.toString(),
       originalUrl: foundUrl.originalUrl,
       shortId: foundUrl.shortId,
+      createdAt: foundUrl.createdAt,
+      updatedAt: foundUrl.updatedAt,
     };
   }
 }
