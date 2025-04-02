@@ -1,3 +1,4 @@
+import { Access } from '../../domain/entities';
 import { CreateAccessRepository } from '../../domain/repositories/create-access.repository';
 import { TrackUrlAccessInput } from '../../domain/types/inputs/uscases/track-url-access.input';
 import { TrackUrlAccessOutput } from '../../domain/types/output/usecases/track-url-access.output';
@@ -9,7 +10,9 @@ export class TrackUrlAccessUseCaseImpl implements TrackUrlAccessUseCase {
   ) {}
 
   async execute(data: TrackUrlAccessInput): Promise<TrackUrlAccessOutput> {
-    const createdAccess = await this.createAccessRepository.createAccess(data);
+    const access = new Access(data);
+    const createdAccess =
+      await this.createAccessRepository.createAccess(access);
     return {
       id: createdAccess.id,
     };
