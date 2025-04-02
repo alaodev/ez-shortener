@@ -9,6 +9,9 @@ export class TrackUrlAccessUseCaseImpl implements TrackUrlAccessUseCase {
   ) {}
 
   async execute(data: TrackUrlAccessInput): Promise<TrackUrlAccessOutput> {
-    return this.createAccessRepository.createAccess(data);
+    const createdAccess = await this.createAccessRepository.createAccess(data);
+    return {
+      id: createdAccess.id,
+    };
   }
 }

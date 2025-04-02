@@ -23,6 +23,8 @@ export class MongoCreateAccessRepository implements CreateAccessRepository {
       id: createdAccess._id.toString(),
       address: createdAccess.address,
       url: createdAccess.url.toString(),
+      createdAt: createdAccess.createdAt,
+      updatedAt: createdAccess.updatedAt,
     };
   }
 }
