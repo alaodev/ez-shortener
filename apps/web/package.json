@@ -13,6 +13,7 @@
     "@formkit/auto-animate": "^0.8.2",
     "@nuxt/eslint": "^1.2.0",
     "@pinia/nuxt": "^0.10.1",
+    "@tanstack/vue-table": "^8.21.2",
     "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^13.0.0",
     "class-variance-authority": "^0.7.1",
