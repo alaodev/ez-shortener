@@ -42,6 +42,10 @@ export class MongoFindAllUserUrlAccessRepository
     return foundAccess.map((access) => ({
       id: access._id.toString(),
       address: access.address,
+      browserName: access.browserName,
+      browserVersion: access.browserVersion,
+      osName: access.osName,
+      osVersion: access.osVersion,
       url: urlId,
       createdAt: access.createdAt,
       updatedAt: access.updatedAt,

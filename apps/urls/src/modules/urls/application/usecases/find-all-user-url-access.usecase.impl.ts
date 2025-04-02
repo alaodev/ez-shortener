@@ -21,6 +21,10 @@ export class FindAllUserUrlAccessUseCaseImpl
     return foundAccess.map((access) => ({
       id: access.id,
       address: access.address,
+      browserName: access.browserName,
+      browserVersion: access.browserVersion,
+      osName: access.osName,
+      osVersion: access.osVersion,
       createdAt: access.createdAt,
     }));
   }

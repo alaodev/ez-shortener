@@ -22,6 +22,10 @@ export class MongoCreateAccessRepository implements CreateAccessRepository {
     return {
       id: createdAccess._id.toString(),
       address: createdAccess.address,
+      browserName: createdAccess.browserName,
+      browserVersion: createdAccess.browserVersion,
+      osName: createdAccess.osName,
+      osVersion: createdAccess.osVersion,
       url: createdAccess.url.toString(),
       createdAt: createdAccess.createdAt,
       updatedAt: createdAccess.updatedAt,

@@ -21,6 +21,7 @@ import {
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
+import { UAParser } from 'ua-parser-js';
 import {
   DeleteUserUrlUseCase,
   FindAllUserUrlAccessUseCase,
@@ -53,11 +54,20 @@ export class UrlsController {
     @Req() req: ExpressRequest,
     @Param('shordId') shortId: string,
   ) {
-    const { ip: address } = req;
     const shortUrlResolved =
       await this.resolveShortenedUrlUseCase.execute(shortId);
+    const { ip: address } = req;
+    const uaString = req.headers['user-agent'];
+    const uaParser = new UAParser(uaString);
+    const { name: browserName, version: browserVersion } =
+      uaParser.getBrowser();
+    const { name: osName, version: osVersion } = uaParser.getOS();
     await this.trackUrlAccessUseCase.execute({
       address: address || 'undefined',
+      browserName,
+      browserVersion,
+      osName,
+      osVersion,
       url: shortUrlResolved.id,
     });
     return shortUrlResolved;
