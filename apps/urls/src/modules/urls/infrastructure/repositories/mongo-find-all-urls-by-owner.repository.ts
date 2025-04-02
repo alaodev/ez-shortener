@@ -24,6 +24,8 @@ export class MongoFindAllUrlsByOwnerRepository
       originalUrl: url.originalUrl,
       shortId: url.shortId,
       owner: url.owner.toString(),
+      createdAt: url.createdAt,
+      updatedAt: url.updatedAt,
     }));
   }
 }

@@ -8,6 +8,12 @@ export class FindAllUserUrlsUseCaseImpl implements FindAllUserUrlsUseCase {
   ) {}
 
   async execute(userId: string): Promise<FindAllUserUrlsOutput> {
-    return this.findAllUrlsByOwnerRepository.findAllUrlsByOwner(userId);
+    const foundUrls =
+      await this.findAllUrlsByOwnerRepository.findAllUrlsByOwner(userId);
+    return foundUrls.map((url) => ({
+      id: url.id,
+      originalUrl: url.originalUrl,
+      shortId: url.shortId,
+    }));
   }
 }

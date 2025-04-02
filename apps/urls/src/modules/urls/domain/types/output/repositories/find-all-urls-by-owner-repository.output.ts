@@ -3,4 +3,6 @@ export type FindAllUrlsByOwnerRepositoryOutput = {
   originalUrl: string;
   shortId: string;
   owner: string;
+  createdAt: Date;
+  updatedAt: Date;
 }[];
