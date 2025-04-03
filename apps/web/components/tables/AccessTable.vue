@@ -13,6 +13,7 @@ export type AccessData = {
 
 export type Props = {
   data: AccessData[];
+  height?: number;
 };
 
 defineProps<Props>();
@@ -94,5 +95,6 @@ const columns: ColumnDef<AccessData>[] = [
     description="This table displays user access records for shortened links, includin visit timestamps, user details, and access counts."
     :data
     :columns
+    :height
   />
 </template>

@@ -16,6 +16,7 @@ const props = defineProps<{
   data: TData[];
   title?: string;
   description?: string;
+  height?: number;
 }>();
 
 const table = useVueTable({
@@ -27,6 +28,8 @@ const table = useVueTable({
   },
   getCoreRowModel: getCoreRowModel(),
 });
+
+const contentHeight = computed(() => `${props.height}px`);
 </script>
 
 <template>
@@ -38,7 +41,7 @@ const table = useVueTable({
       </CardDescription>
     </CardHeader>
     <CardContent>
-      <ScrollArea class="grid">
+      <ScrollArea class="grid" :style="{ height: contentHeight }">
         <Table>
           <TableHeader>
             <TableRow
