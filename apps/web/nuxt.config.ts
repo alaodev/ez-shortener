@@ -27,6 +27,7 @@ export default defineNuxtConfig({
       domainUrl: '',
       authApiKey: '',
       urlsApiKey: '',
+      accessApiKey: '',
     },
   },
   vite: {
