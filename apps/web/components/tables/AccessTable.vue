@@ -89,5 +89,10 @@ const columns: ColumnDef<AccessData>[] = [
 </script>
 
 <template>
-  <DataTable :data :columns />
+  <DataTable
+    title="Shortened Link Access Logs"
+    description="This table displays user access records for shortened links, includin visit timestamps, user details, and access counts."
+    :data
+    :columns
+  />
 </template>
