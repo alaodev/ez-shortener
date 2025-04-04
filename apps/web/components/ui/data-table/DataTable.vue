@@ -1,15 +1,11 @@
 <script setup lang="ts" generic="TData, TValue">
-import type { ColumnDef } from '@tanstack/vue-table';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-
-import { FlexRender, getCoreRowModel, useVueTable } from '@tanstack/vue-table';
+  FlexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useVueTable,
+} from '@tanstack/vue-table';
+import type { ColumnDef } from '@tanstack/vue-table';
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[];
@@ -27,9 +23,12 @@ const table = useVueTable({
     return props.columns;
   },
   getCoreRowModel: getCoreRowModel(),
+  getPaginationRowModel: getPaginationRowModel(),
 });
 
 const contentHeight = computed(() => `${props.height}px`);
+
+table.setPageSize(20);
 </script>
 
 <template>
@@ -84,5 +83,8 @@ const contentHeight = computed(() => `${props.height}px`);
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </CardContent>
+    <CardFooter>
+      <DataTablePagination :table />
+    </CardFooter>
   </Card>
 </template>
