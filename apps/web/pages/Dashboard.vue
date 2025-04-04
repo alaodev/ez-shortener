@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core';
 import AccessTable, {
   type AccessData,
 } from '@/components/tables/AccessTable.vue';
@@ -11,7 +12,10 @@ definePageMeta({
 
 const accessStore = useAccessStore();
 
+const tableHeight = ref();
+const mounted = ref(false);
 const { loadingAccess, access } = storeToRefs(accessStore);
+const { height: windowHeight } = useWindowSize();
 
 const accessTableData: ComputedRef<AccessData[]> = computed(() =>
   access.value.map((item) => ({
@@ -27,19 +31,35 @@ const accessTableData: ComputedRef<AccessData[]> = computed(() =>
 
 const { getAccess } = accessStore;
 
+const working = computed(() => loadingAccess && !mounted.value);
+
 async function handleGetAccess() {
   await useAsyncData('access', async () => {
     return getAccess();
   });
 }
 
+function calculateTableHeight() {
+  tableHeight.value = windowHeight.value - 275;
+}
+
+onMounted(() => {
+  calculateTableHeight();
+  mounted.value = true;
+  watch(windowHeight, () => {
+    calculateTableHeight();
+  });
+});
+
 handleGetAccess();
 </script>
 
 <template>
-  <div class="flex">
-    <div class="container mx-auto">
-      <AccessTable v-if="!loadingAccess" :data="accessTableData" />
-    </div>
+  <div class="container mx-auto">
+    <AccessTable
+      v-if="!working"
+      :data="accessTableData"
+      :height="tableHeight"
+    />
   </div>
 </template>
