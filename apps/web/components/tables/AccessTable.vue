@@ -81,7 +81,7 @@ const columns: ColumnDef<AccessData>[] = [
       const value: Date = row.getValue('createdAt');
       return h(
         'div',
-        { class: 'text-right font-medium' },
+        { class: 'font-medium ml-auto text-end w-[170px]' },
         `${value.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}`,
       );
     },
