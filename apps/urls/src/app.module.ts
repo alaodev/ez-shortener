@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { AuthGuardModule } from '@ez-shortener/auth-guard';
 import { DatabasesModule } from '@ez-shortener/databases';
 import { Module } from '@nestjs/common';
@@ -9,7 +8,6 @@ import { UrlsModule } from './modules/urls/urls.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: path.resolve(__dirname, '..', '..', '..', '.env'),
     }),
     DatabasesModule.registerAsync({
       useFactory: (configService: ConfigService) => {
