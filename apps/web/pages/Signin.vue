@@ -7,6 +7,7 @@ import { useToast } from '@/components/ui/toast';
 definePageMeta({
   auth: false,
   layout: false,
+  pageTransition: false,
   name: 'signin',
   path: '/',
 });
