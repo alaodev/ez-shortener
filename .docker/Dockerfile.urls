@@ -1,0 +1,21 @@
+FROM node:22.14.0
+
+WORKDIR /app
+
+COPY package*.json ./
+
+COPY apps/urls ./apps/urls
+COPY packages ./packages
+
+RUN npm install
+
+RUN npm run build --workspace=@ez-shortener/auth-guard \
+    && npm run build --workspace=@ez-shortener/contracts \
+    && npm run build --workspace=@ez-shortener/databases \
+    && npm run build --workspace=@ez-shortener/exceptions \
+    && npm run build --workspace=@ez-shortener/pipes \
+    && npm run build --workspace=urls
+
+WORKDIR /app/apps/urls
+
+CMD ["node", "dist/main"]
