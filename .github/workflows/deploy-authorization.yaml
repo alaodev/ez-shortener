@@ -1,0 +1,56 @@
+name: Deploy Authentication
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/authentication/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_KEY: ${{ secrets.EC2_KEY }}
+      ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      AUTHENTICATION_PORT: ${{ secrets.AUTHENTICATION_PORT }}
+      MONGO_USERS_URI: ${{ secrets.MONGO_USERS_URI }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: SSH Connection
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $(echo "${{ secrets.EC2_HOST }}" | cut -d'@' -f2) >> ~/.ssh/known_hosts
+
+      - name: Execute EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@$(echo "$EC2_HOST" | cut -d'@' -f2) << EOF
+          docker pull alaodevdocker/authentication:latest
+
+          docker stop authentication || true && docker rm authentication || true
+
+          docker run -d \
+              --name authentication \
+              -p 3001:3001 \
+              -e ENVIRONMENT="$ENVIRONMENT" \
+              -e JWT_SECRET="$JWT_SECRET" \
+              -e AUTHENTICATION_PORT="$AUTHENTICATION_PORT" \
+              -e MONGO_USERS_URI="$MONGO_USERS_URI" \
+              alaodevdocker/authentication:latest
+          EOF
