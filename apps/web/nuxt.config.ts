@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt',
     'shadcn-nuxt',
   ],
+  nitro: {
+    preset: 'netlify',
+  },
   colorMode: {
     classSuffix: '',
   },
