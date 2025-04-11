@@ -53,6 +53,7 @@ export class AuthController {
     response.cookie('access_token', accessToken, {
       httpOnly: true,
       secure: env === 'production' || false,
+      sameSite: env === 'production' ? 'none' : undefined,
     });
   }
 
@@ -63,6 +64,7 @@ export class AuthController {
     response.clearCookie('access_token', {
       httpOnly: true,
       secure: env === 'production' || false,
+      sameSite: env === 'production' ? 'none' : undefined,
     });
   }
 }
