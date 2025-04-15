@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
   ],
   nitro: {
-    preset: 'netlify',
+    preset: 'vercel',
   },
   colorMode: {
     classSuffix: '',
