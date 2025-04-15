@@ -30,6 +30,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseUrl: '',
+      apiGatewayUrl: '',
       domainUrl: '',
       authApiKey: '',
       urlsApiKey: '',
