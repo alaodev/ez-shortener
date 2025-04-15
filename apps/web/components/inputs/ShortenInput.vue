@@ -42,12 +42,13 @@ async function handleCopyToClipboard() {
     :class="shrinkStyle"
   >
     <div v-if="!props.loading" class="flex-1 min-w-0">
-      <span
+      <input
         v-if="props.shortenedUrl"
-        class="block overflow-hidden text-ellipsis whitespace-nowrap"
-      >
-        {{ props.shortenedUrl }}
-      </span>
+        id="shortenedUrl"
+        class="bg-transparent outline-none w-full"
+        :value="props.shortenedUrl"
+        disabled
+      />
       <input
         v-else
         id="originalUrl"
