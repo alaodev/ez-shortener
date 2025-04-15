@@ -45,7 +45,7 @@ function handleSubmitForm() {
     class="flex flex-col gap-4 items-center w-full"
     @submit.prevent="handleSubmitForm"
   >
-    <h1 class="font-medium text-2xl">{{ formTitle }}</h1>
+    <h1 class="font-medium text-xl text-center md:text-2xl">{{ formTitle }}</h1>
     <ShortenInput
       v-model="originalUrl"
       :shortened-url="props.shortenedUrl"
