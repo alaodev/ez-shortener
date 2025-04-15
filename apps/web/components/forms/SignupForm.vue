@@ -50,90 +50,72 @@ const onSubmit = handleSubmit((values) => emits('submit:form', values));
 </script>
 
 <template>
-  <Card class="overflow-hidden">
-    <CardContent class="grid p-0 md:grid-cols-2">
-      <div class="relative hidden bg-muted md:block">
-        <img
-          src="/placeholder.svg"
-          alt="Image"
-          class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
+  <form class="grid w-[300px] gap-6" @submit="onSubmit">
+    <div class="text-center">
+      <h1 class="text-2xl font-bold">Let's register</h1>
+      <p class="text-balance text-muted-foreground">
+        Fill in your details below to sign up
+      </p>
+    </div>
+    <div class="flex flex-col gap-4">
+      <FormField v-slot="{ componentField }" name="username">
+        <FormItem>
+          <FormLabel>Username</FormLabel>
+          <FormControl>
+            <Input
+              id="username"
+              type="text"
+              v-bind="componentField"
+              :disabled
+            />
+          </FormControl>
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ componentField }" name="email">
+        <FormItem>
+          <FormLabel>Email</FormLabel>
+          <FormControl>
+            <Input id="email" type="email" v-bind="componentField" :disabled />
+          </FormControl>
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ componentField }" name="password">
+        <FormItem>
+          <FormLabel>Password</FormLabel>
+          <FormControl>
+            <Input
+              id="password"
+              type="password"
+              v-bind="componentField"
+              :disabled
+            />
+          </FormControl>
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ componentField }" name="passwordConfirmation">
+        <FormItem>
+          <FormLabel>Repeat Password</FormLabel>
+          <FormControl>
+            <Input
+              id="passwordConfirmation"
+              type="password"
+              v-bind="componentField"
+              :disabled
+            />
+          </FormControl>
+        </FormItem>
+      </FormField>
+    </div>
+    <div class="flex flex-col gap-4">
+      <Button type="submit" class="w-full" size="lg" :disabled>
+        Create account
+      </Button>
+      <div class="text-center text-sm">
+        Already have an accoun?
+        <NuxtLink to="/" class="underline underline-offset-4">
+          Sign in
+        </NuxtLink>
       </div>
-      <form class="p-6 md:p-8" @submit="onSubmit">
-        <div class="flex flex-col gap-4">
-          <div class="text-center">
-            <h1 class="text-2xl font-bold">Let's register</h1>
-            <p class="text-balance text-muted-foreground">
-              Fill in your details below to sign up
-            </p>
-          </div>
-          <div class="flex flex-col gap-4 h-[350px]">
-            <FormField v-slot="{ componentField }" name="username">
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input
-                    id="username"
-                    type="text"
-                    v-bind="componentField"
-                    :disabled
-                  />
-                </FormControl>
-              </FormItem>
-            </FormField>
-            <FormField v-slot="{ componentField }" name="email">
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    id="email"
-                    type="email"
-                    v-bind="componentField"
-                    :disabled
-                  />
-                </FormControl>
-              </FormItem>
-            </FormField>
-            <FormField v-slot="{ componentField }" name="password">
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    id="password"
-                    type="password"
-                    v-bind="componentField"
-                    :disabled
-                  />
-                </FormControl>
-              </FormItem>
-            </FormField>
-            <FormField v-slot="{ componentField }" name="passwordConfirmation">
-              <FormItem>
-                <FormLabel>Repeat Password</FormLabel>
-                <FormControl>
-                  <Input
-                    id="passwordConfirmation"
-                    type="password"
-                    v-bind="componentField"
-                    :disabled
-                  />
-                </FormControl>
-              </FormItem>
-            </FormField>
-          </div>
-          <div class="flex flex-col gap-4">
-            <Button type="submit" class="w-full" :disabled>
-              Create account
-            </Button>
-            <div class="text-center text-sm">
-              Already have an accoun?
-              <NuxtLink to="/" class="underline underline-offset-4">
-                Sign in
-              </NuxtLink>
-            </div>
-          </div>
-        </div>
-      </form>
-    </CardContent>
-  </Card>
+    </div>
+  </form>
 </template>

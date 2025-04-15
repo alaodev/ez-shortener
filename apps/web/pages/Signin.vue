@@ -29,10 +29,18 @@ async function handleAuthenticateUser(data: SubmitFormDataType) {
 
 <template>
   <div
-    class="flex min-h-svh flex-col items-center justify-center p-6 md:p-10 md:bg-muted"
+    class="w-full grid h-screen lg:grid-cols-2 xl:grid-cols-5 2xl:grid-cols-3"
   >
-    <div class="w-full max-w-sm md:max-w-3xl">
+    <div class="flex items-center justify-center xl:col-span-2 2xl:col-span-1">
       <SigninForm :disabled="loading" @submit:form="handleAuthenticateUser" />
+    </div>
+    <div class="hidden bg-muted relative lg:block xl:col-span-3 2xl:col-span-2">
+      <img
+        src="/placeholder.svg"
+        width="1920"
+        height="1080"
+        class="absolute h-full w-full object-cover"
+      />
     </div>
   </div>
 </template>
