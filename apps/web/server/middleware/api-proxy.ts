@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
         target,
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
+        xfwd: true,
       });
       proxy(req, res, (result) => {
         if (result instanceof Error) reject(result);
