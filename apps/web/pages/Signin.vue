@@ -23,7 +23,7 @@ async function handleAuthenticateUser(data: SubmitFormDataType) {
   const { email, password } = data;
   await authenticateUser(email, password);
   toast({ title: 'Welcome', description: 'Login successfully!' });
-  navigateTo('/dashboard');
+  navigateTo('/shorten');
 }
 </script>
 
