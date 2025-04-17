@@ -17,7 +17,7 @@ defineProps<DataTableFiltersProps>();
 </script>
 
 <template>
-  <div v-if="filters" class="grid grid-cols-12 gap-6">
+  <div v-if="filters" class="grid grid-cols-12 gap-6 w-full">
     <div
       v-for="filter of filters"
       :key="filter.key"

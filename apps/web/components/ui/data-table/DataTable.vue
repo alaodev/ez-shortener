@@ -1,6 +1,7 @@
 <script setup lang="ts" generic="TData, TValue">
 import { Loader2 } from 'lucide-vue-next';
 import { valueUpdater } from '~/lib/utils';
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import {
   FlexRender,
   getCoreRowModel,
@@ -21,6 +22,9 @@ const props = defineProps<{
   loading?: boolean;
 }>();
 
+const breakpoints = useBreakpoints(breakpointsTailwind);
+
+const openFiltersModal = ref(false);
 const columnFilters = ref<ColumnFiltersState>([]);
 
 const table = useVueTable({
@@ -44,6 +48,10 @@ const table = useVueTable({
 
 const contentHeight = computed(() => `${props.height}px`);
 
+watch(breakpoints.md, (newValue) => {
+  if (newValue) openFiltersModal.value = false;
+});
+
 table.setPageSize(20);
 </script>
 
@@ -56,7 +64,29 @@ table.setPageSize(20);
       </CardDescription>
     </CardHeader>
     <CardContent v-auto-animate>
-      <DataTableFilters class="mb-4" :filters :table />
+      <div class="mb-4">
+        <DataTableFilters class="hidden md:grid" :filters :table />
+        <Drawer v-model:open="openFiltersModal">
+          <DrawerTrigger as-child>
+            <Button class="w-full md:hidden" variant="outline">
+              Filters
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div class="mx-auto w-full max-w-md">
+              <DrawerHeader>
+                <DrawerTitle>Filters</DrawerTitle>
+                <DrawerDescription>
+                  Define your table filters below.
+                </DrawerDescription>
+              </DrawerHeader>
+              <div class="px-4 pb-10">
+                <DataTableFilters :filters :table />
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
       <ScrollArea
         v-if="!loading"
         class="grid"

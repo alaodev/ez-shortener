@@ -43,8 +43,8 @@ async function handleGetAccess() {
 
 function calculateTableHeight() {
   if (breakpoints['md'].value)
-    return (tableHeight.value = windowHeight.value - 320);
-  return (tableHeight.value = windowHeight.value - 510);
+    return (tableHeight.value = windowHeight.value - 310);
+  return (tableHeight.value = windowHeight.value - 330);
 }
 
 onMounted(() => {
