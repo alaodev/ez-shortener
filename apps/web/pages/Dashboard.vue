@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { useWindowSize } from '@vueuse/core';
+import {
+  breakpointsTailwind,
+  useBreakpoints,
+  useWindowSize,
+} from '@vueuse/core';
 import AccessTable, {
   type AccessData,
 } from '@/components/tables/AccessTable.vue';
@@ -11,9 +15,9 @@ definePageMeta({
 });
 
 const accessStore = useAccessStore();
+const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const tableHeight = ref();
-const mounted = ref(false);
 const { loadingAccess, access } = storeToRefs(accessStore);
 const { height: windowHeight } = useWindowSize();
 
@@ -38,13 +42,14 @@ async function handleGetAccess() {
 }
 
 function calculateTableHeight() {
-  tableHeight.value = windowHeight.value - 275;
+  if (breakpoints['md'].value)
+    return (tableHeight.value = windowHeight.value - 320);
+  return (tableHeight.value = windowHeight.value - 390);
 }
 
 onMounted(() => {
   calculateTableHeight();
-  mounted.value = true;
-  watch(windowHeight, () => {
+  watch([windowHeight, breakpoints.current()], () => {
     calculateTableHeight();
   });
 });
@@ -55,7 +60,7 @@ handleGetAccess();
 <template>
   <div class="container mx-auto">
     <AccessTable
-      v-if="mounted"
+      v-if="tableHeight"
       :data="accessTableData"
       :height="tableHeight"
       :loading="loadingAccess"

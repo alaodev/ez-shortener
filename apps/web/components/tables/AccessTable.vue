@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { EthernetPort, FormInput } from 'lucide-vue-next';
 import type { ColumnDef } from '@tanstack/vue-table';
 
 export type AccessData = {
@@ -94,6 +95,15 @@ const columns: ColumnDef<AccessData>[] = [
   <DataTable
     title="Shortened Link Access Logs"
     description="This table displays user access records for shortened links, includin visit timestamps, user details, and access counts."
+    :filters="[
+      { key: 'originalUrl', placeholder: 'Link', colSpan: 8, icon: FormInput },
+      {
+        key: 'address',
+        placeholder: 'Address',
+        colSpan: 4,
+        icon: EthernetPort,
+      },
+    ]"
     :data
     :columns
     :height
