@@ -1,21 +1,27 @@
 <script setup lang="ts" generic="TData, TValue">
 import { Loader2 } from 'lucide-vue-next';
+import { valueUpdater } from '~/lib/utils';
 import {
   FlexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getFilteredRowModel,
   useVueTable,
 } from '@tanstack/vue-table';
-import type { ColumnDef } from '@tanstack/vue-table';
+import DataTableFilters, { type DataTableFilter } from './DataTableFilters.vue';
+import type { ColumnDef, ColumnFiltersState } from '@tanstack/vue-table';
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filters?: DataTableFilter[];
   title?: string;
   description?: string;
   height?: number;
   loading?: boolean;
 }>();
+
+const columnFilters = ref<ColumnFiltersState>([]);
 
 const table = useVueTable({
   get data() {
@@ -26,6 +32,14 @@ const table = useVueTable({
   },
   getCoreRowModel: getCoreRowModel(),
   getPaginationRowModel: getPaginationRowModel(),
+  onColumnFiltersChange: (updaterOrValue) =>
+    valueUpdater(updaterOrValue, columnFilters),
+  getFilteredRowModel: getFilteredRowModel(),
+  state: {
+    get columnFilters() {
+      return columnFilters.value;
+    },
+  },
 });
 
 const contentHeight = computed(() => `${props.height}px`);
@@ -42,6 +56,7 @@ table.setPageSize(20);
       </CardDescription>
     </CardHeader>
     <CardContent v-auto-animate>
+      <DataTableFilters class="mb-4" :filters :table />
       <ScrollArea
         v-if="!loading"
         class="grid"
