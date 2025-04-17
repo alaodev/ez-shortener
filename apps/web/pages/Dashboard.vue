@@ -31,8 +31,6 @@ const accessTableData: ComputedRef<AccessData[]> = computed(() =>
 
 const { getAccess } = accessStore;
 
-const working = computed(() => loadingAccess && !mounted.value);
-
 async function handleGetAccess() {
   await useAsyncData('access', async () => {
     return getAccess();
@@ -57,9 +55,10 @@ handleGetAccess();
 <template>
   <div class="container mx-auto">
     <AccessTable
-      v-if="!working"
+      v-if="mounted"
       :data="accessTableData"
       :height="tableHeight"
+      :loading="loadingAccess"
     />
   </div>
 </template>

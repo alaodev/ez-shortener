@@ -14,6 +14,7 @@ export type AccessData = {
 export type Props = {
   data: AccessData[];
   height?: number;
+  loading?: boolean;
 };
 
 defineProps<Props>();
@@ -96,5 +97,6 @@ const columns: ColumnDef<AccessData>[] = [
     :data
     :columns
     :height
+    :loading
   />
 </template>

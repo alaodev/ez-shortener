@@ -1,4 +1,5 @@
 <script setup lang="ts" generic="TData, TValue">
+import { Loader2 } from 'lucide-vue-next';
 import {
   FlexRender,
   getCoreRowModel,
@@ -13,6 +14,7 @@ const props = defineProps<{
   title?: string;
   description?: string;
   height?: number;
+  loading?: boolean;
 }>();
 
 const table = useVueTable({
@@ -39,8 +41,12 @@ table.setPageSize(20);
         {{ description }}
       </CardDescription>
     </CardHeader>
-    <CardContent>
-      <ScrollArea class="grid" :style="{ height: contentHeight }">
+    <CardContent v-auto-animate>
+      <ScrollArea
+        v-if="!loading"
+        class="grid"
+        :style="{ height: contentHeight }"
+      >
         <Table>
           <TableHeader>
             <TableRow
@@ -82,6 +88,13 @@ table.setPageSize(20);
         </Table>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
+      <div
+        v-else
+        class="flex items-center justify-center"
+        :style="{ height: contentHeight }"
+      >
+        <Loader2 class="animate-spin" />
+      </div>
     </CardContent>
     <CardFooter>
       <DataTablePagination :table />
