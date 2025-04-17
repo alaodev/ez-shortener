@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Loader2 } from 'lucide-vue-next';
 import SignupForm, {
   type SubmitFormDataType,
 } from '@/components/forms/SignupForm.vue';
@@ -42,8 +43,16 @@ async function handleRegisterUser(data: SubmitFormDataType) {
         </p>
       </div>
     </div>
-    <div class="flex items-center justify-center xl:col-span-2 2xl:col-span-1">
-      <SignupForm :disabled="loading" @submit:form="handleRegisterUser" />
+    <div
+      v-auto-animate
+      class="flex items-center justify-center xl:col-span-2 2xl:col-span-1"
+    >
+      <SignupForm
+        v-if="!loading"
+        :disabled="loading"
+        @submit:form="handleRegisterUser"
+      />
+      <Loader2 v-else class="animate-spin" />
     </div>
   </div>
 </template>

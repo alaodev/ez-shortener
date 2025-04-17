@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Loader2 } from 'lucide-vue-next';
 import SigninForm, {
   type SubmitFormDataType,
 } from '@/components/forms/SigninForm.vue';
@@ -31,8 +32,16 @@ async function handleAuthenticateUser(data: SubmitFormDataType) {
   <div
     class="w-full grid h-screen lg:grid-cols-2 xl:grid-cols-5 2xl:grid-cols-3"
   >
-    <div class="flex items-center justify-center xl:col-span-2 2xl:col-span-1">
-      <SigninForm :disabled="loading" @submit:form="handleAuthenticateUser" />
+    <div
+      v-auto-animate
+      class="flex items-center justify-center xl:col-span-2 2xl:col-span-1"
+    >
+      <SigninForm
+        v-if="!loading"
+        :disabled="loading"
+        @submit:form="handleAuthenticateUser"
+      />
+      <Loader2 v-else class="animate-spin" />
     </div>
     <div
       class="hidden items-center justify-center bg-[url('/placeholder.svg')] bg-cover bg-center lg:flex xl:col-span-3 2xl:col-span-2 filter dark:invert"
