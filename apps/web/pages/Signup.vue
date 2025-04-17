@@ -30,13 +30,17 @@ async function handleRegisterUser(data: SubmitFormDataType) {
   <div
     class="w-full grid h-screen lg:grid-cols-2 xl:grid-cols-5 2xl:grid-cols-3"
   >
-    <div class="hidden bg-muted relative lg:block xl:col-span-3 2xl:col-span-2">
-      <img
-        src="/placeholder.svg"
-        width="1920"
-        height="1080"
-        class="absolute h-full w-full object-cover"
-      />
+    <div
+      class="hidden items-center justify-center bg-[url('/placeholder.svg')] bg-cover bg-center lg:flex xl:col-span-3 2xl:col-span-2 filter dark:invert"
+    >
+      <div class="text-center w-[325px] space-y-4 xl:w-[460px] xl:text-left">
+        <h1 class="text-5xl font-bold text-white xl:text-7xl">
+          Let's register!
+        </h1>
+        <p class="text-xl font-light text-white xl:text-2xl">
+          Fill in your details below to sign up.
+        </p>
+      </div>
     </div>
     <div class="flex items-center justify-center xl:col-span-2 2xl:col-span-1">
       <SignupForm :disabled="loading" @submit:form="handleRegisterUser" />
