@@ -28,7 +28,7 @@ const signupSchemaValidator = zod
       .nonempty({ message: 'Required field' }),
     password: zod
       .string()
-      .min(8, { message: 'Password must contain at least 3 characters' })
+      .min(8, { message: 'Password must contain at least 8 characters' })
       .max(32, { message: 'Password must contain at most 32 character(s)' })
       .regex(/[a-z]/, {
         message: 'Password must contain at least 1 lowercase character',
