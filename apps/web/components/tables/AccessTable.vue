@@ -29,8 +29,7 @@ const columns: ColumnDef<AccessData>[] = [
       return h(
         'div',
         {
-          class:
-            'overflow-hidden text-ellipsis whitespace-nowrap font-medium w-[200px]',
+          class: 'overflow-hidden text-ellipsis whitespace-nowrap  w-[200px]',
         },
         `${value}`,
       );
@@ -41,7 +40,7 @@ const columns: ColumnDef<AccessData>[] = [
     header: () => h('div', { class: 'text-center' }, 'Address'),
     cell: ({ row }) => {
       const value = row.getValue('address');
-      return h('div', { class: 'text-center font-medium' }, `${value}`);
+      return h('div', { class: 'text-center ' }, `${value}`);
     },
   },
   {
@@ -49,7 +48,7 @@ const columns: ColumnDef<AccessData>[] = [
     header: () => h('div', { class: 'text-center' }, 'Browser Name'),
     cell: ({ row }) => {
       const value = row.getValue('browserName');
-      return h('div', { class: 'text-center font-medium' }, `${value}`);
+      return h('div', { class: 'text-center ' }, `${value}`);
     },
   },
   {
@@ -57,7 +56,7 @@ const columns: ColumnDef<AccessData>[] = [
     header: () => h('div', { class: 'text-center' }, 'Browser Version'),
     cell: ({ row }) => {
       const value = row.getValue('browserVersion');
-      return h('div', { class: 'text-center font-medium' }, `${value}`);
+      return h('div', { class: 'text-center ' }, `${value}`);
     },
   },
   {
@@ -65,7 +64,7 @@ const columns: ColumnDef<AccessData>[] = [
     header: () => h('div', { class: 'text-center' }, 'OS Name'),
     cell: ({ row }) => {
       const value = row.getValue('osName');
-      return h('div', { class: 'text-center font-medium' }, `${value}`);
+      return h('div', { class: 'text-center ' }, `${value}`);
     },
   },
   {
@@ -73,7 +72,7 @@ const columns: ColumnDef<AccessData>[] = [
     header: () => h('div', { class: 'text-center' }, 'OS Version'),
     cell: ({ row }) => {
       const value = row.getValue('osVersion');
-      return h('div', { class: 'text-center font-medium' }, `${value}`);
+      return h('div', { class: 'text-center ' }, `${value}`);
     },
   },
   {
@@ -83,7 +82,7 @@ const columns: ColumnDef<AccessData>[] = [
       const value: Date = row.getValue('createdAt');
       return h(
         'div',
-        { class: 'font-medium ml-auto text-end w-[170px]' },
+        { class: ' ml-auto text-end w-[170px]' },
         `${value.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })}`,
       );
     },
