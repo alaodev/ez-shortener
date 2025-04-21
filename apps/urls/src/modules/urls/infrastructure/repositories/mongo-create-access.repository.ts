@@ -18,6 +18,7 @@ export class MongoCreateAccessRepository implements CreateAccessRepository {
     const createdAccess = await this.accessModel.create({
       ...access,
       url: new Types.ObjectId(access.url),
+      owner: new Types.ObjectId(access.owner),
     });
     return {
       id: createdAccess._id.toString(),

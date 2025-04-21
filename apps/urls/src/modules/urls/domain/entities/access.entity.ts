@@ -6,6 +6,7 @@ export class Access {
   public osName?: string;
   public osVersion?: string;
   public url: string;
+  public owner: string;
 
   constructor({
     id,
@@ -15,7 +16,8 @@ export class Access {
     osName,
     osVersion,
     url,
-  }: Partial<Access> & Pick<Access, 'address' | 'url'>) {
+    owner,
+  }: Partial<Access> & Pick<Access, 'address' | 'url' | 'owner'>) {
     this.id = id;
     this.address = address;
     this.browserName = browserName;
@@ -23,5 +25,6 @@ export class Access {
     this.osName = osName;
     this.osVersion = osVersion;
     this.url = url;
+    this.owner = owner;
   }
 }

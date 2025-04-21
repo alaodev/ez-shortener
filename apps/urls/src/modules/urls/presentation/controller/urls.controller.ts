@@ -66,6 +66,7 @@ export class UrlsController {
       osName,
       osVersion,
       url: shortUrlResolved.id,
+      owner: shortUrlResolved.owner,
     });
     return shortUrlResolved;
   }

@@ -17,6 +17,7 @@ export class ResolveShortenedUrlUseCaseImpl
     return {
       id: foundUrl.id,
       originalUrl: foundUrl.originalUrl,
+      owner: foundUrl.owner,
     };
   }
 }

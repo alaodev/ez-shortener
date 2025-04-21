@@ -5,4 +5,5 @@ export type TrackUrlAccessInput = {
   osName?: string;
   osVersion?: string;
   url: string;
+  owner: string;
 };
