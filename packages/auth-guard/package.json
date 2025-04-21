@@ -33,6 +33,7 @@
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/jwt": "^11.0.0",
+    "cookie": "^1.0.2",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
