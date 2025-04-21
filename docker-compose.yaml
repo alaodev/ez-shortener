@@ -48,7 +48,7 @@ services:
       - mongo-network
     extra_hosts:
       - host.docker.internal:host-gateway
-  
+
   kong-database:
     image: postgres:13-alpine
     environment:
@@ -63,9 +63,9 @@ services:
     volumes:
       - kong-data:/var/lib/postgresql/data
 
-  kong-migrations-up:
-    image: kong
-    command: kong migrations bootstrap && kong migrations up
+  kong-migrations-bootstrap:
+    image: kong/kong-gateway
+    command: kong migrations bootstrap
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
@@ -75,9 +75,23 @@ services:
     depends_on:
       kong-database:
         condition: service_healthy
+    restart: on-failure
+
+  kong-migrations-up:
+    image: kong/kong-gateway
+    command: kong migrations up
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-database
+      KONG_PG_DATABASE: kong
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+    depends_on:
+      - kong-migrations-bootstrap
+    restart: on-failure
 
   kong-migrations-finish:
-    image: kong
+    image: kong/kong-gateway
     command: kong migrations finish
     environment:
       KONG_DATABASE: postgres
@@ -87,9 +101,10 @@ services:
       KONG_PG_PASSWORD: kong
     depends_on:
       - kong-migrations-up
+    restart: on-failure
 
   kong:
-    image: kong
+    image: kong/kong-gateway
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
@@ -115,7 +130,6 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     depends_on:
-      - kong-database
       - kong-migrations-finish
 
 volumes:
