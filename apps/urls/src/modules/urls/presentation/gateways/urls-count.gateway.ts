@@ -35,11 +35,7 @@ export class UrlsCountGateway
     await this.emitCurrentUrlsCount();
   }
 
-  async handleDisconnect() {
-    if (this.changeStream) {
-      await this.changeStream.close();
-    }
-  }
+  async handleDisconnect() {}
 
   private async emitCurrentUrlsCount() {
     const { count } = await this.countUrlsUseCase.execute();
