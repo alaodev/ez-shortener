@@ -5,12 +5,23 @@
   "author": "alaodev",
   "private": true,
   "license": "UNLICENSED",
-  "types": "dist/types/main.d.ts",
+  "types": "dist/main.d.ts",
+  "typesVersions": {
+    "*": {
+      "websocket": [
+        "dist/types/filters/websocket-exception.filter.d.ts"
+      ]
+    }
+  },
   "exports": {
     ".": {
       "import": "./dist/esm/main.js",
       "require": "./dist/main.js",
       "types": "./dist/types/main.d.ts"
+    },
+    "./websocket": {
+      "import": "./dist/esm/filters/websocket-exception.filter.js",
+      "require": "./dist/filters/websocket-exception.filter.js"
     }
   },
   "module": "./dist/esm/main.js",
