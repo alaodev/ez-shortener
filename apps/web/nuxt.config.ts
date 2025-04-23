@@ -40,14 +40,6 @@ export default defineNuxtConfig({
   vite: {
     server: {
       allowedHosts: ['host.docker.internal'],
-      proxy: {
-        '/api': {
-          target: process.env.NUXT_PUBLIC_API_GATEWAY_URL,
-          changeOrigin: true,
-          ws: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      },
     },
   },
 });
