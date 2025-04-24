@@ -33,7 +33,7 @@ const accessTableData: ComputedRef<AccessData[]> = computed(() =>
   })),
 );
 
-const { getAccess } = accessStore;
+const { getAccess, getAccessWs, wsDisconnect } = accessStore;
 
 async function handleGetAccess() {
   await useAsyncData('access', async () => {
@@ -48,11 +48,14 @@ function calculateTableHeight() {
 }
 
 onMounted(() => {
+  getAccessWs();
   calculateTableHeight();
   watch([windowHeight, breakpoints.current()], () => {
     calculateTableHeight();
   });
 });
+
+onBeforeUnmount(() => wsDisconnect());
 
 handleGetAccess();
 </script>
