@@ -3,7 +3,12 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".output/**"]
+      "outputs": ["dist/**", ".output/**"],
+      "env": [
+        "NUXT_PUBLIC_BASE_URL",
+        "NUXT_PUBLIC_DOMAIN_URL",
+        "NUXT_PUBLIC_API_GATEWAY_URL"
+      ]
     },
     "dev": {
       "cache": false,
