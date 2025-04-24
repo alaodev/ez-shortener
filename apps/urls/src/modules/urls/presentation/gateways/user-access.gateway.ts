@@ -44,11 +44,10 @@ export class UserAccessGateway
 
   @UseGuards(WsAuthGuard)
   @SubscribeMessage('init')
-  async init(@ConnectedSocket() client: AuthenticatedClient) {
+  init(@ConnectedSocket() client: AuthenticatedClient) {
     const { id } = client.user;
     this.addSocketToUser(id, client);
     this.watchAccessCollection(id);
-    await this.emitCurrentUserAccess(id, client);
   }
 
   handleDisconnect(client: AuthenticatedClient) {
@@ -69,8 +68,9 @@ export class UserAccessGateway
     socket: AuthenticatedClient,
   ) {
     try {
-      const accessData = await this.findAllUserAccessUseCase.execute(userId);
-      socket.emit('userAccessUpdated', { access: accessData });
+      const foundUserAccess =
+        await this.findAllUserAccessUseCase.execute(userId);
+      socket.emit('userAccessUpdated', foundUserAccess);
     } catch (err) {
       if (err instanceof WsException) {
         throw new WsException(err.message);
@@ -108,9 +108,8 @@ export class UserAccessGateway
   private async handleChangeAsync(userId: string) {
     const sockets = this.userSockets.get(userId);
     if (!sockets) return;
-    const foundUserAccess = await this.findAllUserAccessUseCase.execute(userId);
     for (const socket of sockets) {
-      socket.emit('userAccessUpdated', { access: foundUserAccess });
+      await this.emitCurrentUserAccess(userId, socket);
     }
   }
 
