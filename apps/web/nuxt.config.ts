@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
   },
   imports: {
-    dirs: ['composables/useApi'],
+    dirs: ['composables/useApi', 'composables/useSocket'],
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
