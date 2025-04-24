@@ -35,6 +35,7 @@ export default defineNuxtConfig({
       authApiKey: '',
       urlsApiKey: '',
       accessApiKey: '',
+      wsAccessApiKey: '',
     },
   },
   vite: {
