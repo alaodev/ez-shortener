@@ -19,6 +19,9 @@ export default defineNuxtConfig({
   ],
   nitro: {
     preset: 'vercel',
+    output: {
+      dir: '../../.vercel/output',
+    },
   },
   colorMode: {
     classSuffix: '',
